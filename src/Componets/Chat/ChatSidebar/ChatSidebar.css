@@ -1,0 +1,82 @@
+@import url('https://fonts.google.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+:root{
+    --green:#27ae60;
+    --black:#192a56;
+    --light-color:#666;
+    --box-shadow:0 .5rem 1.5rem rgba(0,0,0,.1);
+}
+
+*{
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline:none;
+    border: none;
+    transition: all .2s linear;
+}
+html{
+    scroll-padding-top: 5.5rem;
+    scroll-behavior: smooth;
+}
+
+.chat-sidebar-container{
+    background-color:white;
+    box-shadow: var(--box-shadow);
+    height: 80vh;
+    width: 25%;
+    left: 0;
+    top: 10%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    flex-direction: column;
+}
+.user-container{
+    margin-top: 20%;
+}
+.user-container-items{
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+    cursor: pointer;
+    width: 130%;
+}
+.user-container-items:hover{
+    background-color: #666;
+    border-radius: 10px;
+    width: 130%;
+    color: white;
+}
+.user-img{
+    clip-path: circle();
+    width: 70%;
+    height: 70%;
+}
+.search-container{
+   top: 10%;
+   position: fixed;
+   z-index: 1;
+   background-color: #f5f5f5;
+   width: 30%;
+   height: 10vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.search-input{
+    padding: 8px;
+    border: 1px solid #192a56;
+    border-radius: 5px;
+    width: 70%;
+}
+.search-input:hover {
+    border-color: blueviolet;
+}
+
+.search-input:focus-within {
+    border-color: blueviolet;
+    outline: 0;
+    box-shadow: 0 0 0 1.5px #2563EB;
+}

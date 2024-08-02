@@ -1,0 +1,17 @@
+import doctor from "../Componets/images/staff/doctor 1.png";
+import lab from "../Componets/images/staff/lab-tool.png";
+import pharmacist from "../Componets/images/staff/pharmacist 1.png";
+import nurse from "../Componets/images/staff/nurse 1.png";
+import accountant from "../Componets/images/staff/accountant 1.png";
+import radiographer from "../Componets/images/staff/radiologist 1.png";
+import patient from "../Componets/images/staff/patient 1.png";
+import appointment from "../Componets/images/staff/appointment.jpg";
+import blood from "../Componets/images/staff/blood-bank.avif";
+import book from "../Componets/images/staff/book.jpg";
+import birth from "../Componets/images/staff/birth 1.jpg";
+import drug from "../Componets/images/staff/drug.jpg";
+import medicine from "../Componets/images/staff/drug.jpg";
+import death from "../Componets/images/staff/death.png";
+import operation from "../Componets/images/staff/operation 2.jpg";
+import allotment from "../Componets/images/staff/allotment.jpg";
+import bed from "../Componets/images/staff/bed.png";

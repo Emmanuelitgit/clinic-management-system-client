@@ -1,0 +1,128 @@
+@import url('https://fonts.google.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
+
+:root {
+    --green: #27ae60;
+    --black: #192a56;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+* {
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    transition: all .2s linear;
+}
+  
+
+html {
+    scroll-padding-top: 5.5rem;
+    scroll-behavior: smooth;
+}
+
+.header-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    margin-bottom: 5%;
+    margin-top: 2%;
+    gap: 10px;
+}
+.welcome-text{
+    font-size: 115%;
+    color: var(--black);
+}
+.login-title{
+    font-size: 160%;
+    color: var(--black);
+    margin-top: 5%;
+}
+.login-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.5),
+        rgba(255, 255, 255, 0.5)
+      ),
+      url("../../Componets//images//background1.avif")
+        center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-input-container {
+    box-shadow: var(--box-shadow);
+    background-color: white;
+    height: 75vh;
+    width: 36%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 4px;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    border: 1px solid gray;
+    margin: 2%;
+    border-radius: 7px;
+}
+
+.input-field:hover {
+    border-color: blueviolet;
+}
+
+.input-field:focus-within {
+    border-color: blueviolet;
+    outline: 0;
+    box-shadow: 0 0 0 1.5px #2563EB;
+}
+
+.login-input {
+    padding: 12px;
+    outline: none;
+    border: none;
+    width: 97%;
+    border-radius: 15px;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 60%;
+}
+
+.button {
+    padding: 12px;
+    outline: none;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #0D2481;
+    color: white;
+    cursor: pointer;
+}
+
+.copyright {
+    font-size: 80%;
+    width: 75%;
+    left: 37%;
+    margin-top: 9%;
+    color: var(--black);
+}
