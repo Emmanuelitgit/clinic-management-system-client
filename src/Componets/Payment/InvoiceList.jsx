@@ -9,6 +9,7 @@ import ManageInvoice from "./ManageInvoice";
 import ActionBtn from '../Buttons/ActionBtn';
 import { useDispatch, useSelector } from 'react-redux';
 import StatusDropdown from '../Buttons/StatusDropdown';
+import axios from 'axios';
 
 
 const InvoiceList = () => {
@@ -22,8 +23,10 @@ const InvoiceList = () => {
 
   const role = localStorage.getItem("role").toLowerCase();
   const [data, setData] = useState({ columns: [], rows: [] });
-
+  
   const dep = useSelector(state => state.count?.depValue) || [2];
+  axios.defaults.withCredentials = true;
+
 
   useEffect(() => {
       const fetchData = async () => {
@@ -36,6 +39,8 @@ const InvoiceList = () => {
                   throw new Error('Failed to fetch data');
               }
               const fetchedData = await response.json();
+
+              console.log(fetchedData)
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc' },

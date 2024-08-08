@@ -88,9 +88,10 @@ const data = {
     {
       label: 'Revenue(Ghc)',
       data: [
-             JanuaryTotalAmount, februaryTotalAmount, marchTotalAmount, aprilTotalAmount, 
-             mayTotalAmount, juneTotalAmount, julyTotalAmount,augustTotalAmount,septemberTotalAmount,
-             octoberTotalAmount,novemberTotalAmount,decemberTotalAmount
+            //  JanuaryTotalAmount, februaryTotalAmount, marchTotalAmount, aprilTotalAmount, 
+            //  mayTotalAmount, juneTotalAmount, julyTotalAmount,augustTotalAmount,septemberTotalAmount,
+            //  octoberTotalAmount,novemberTotalAmount,decemberTotalAmount
+            20,25,35,25,15,40,45,26,30,50,45,38
             ],
       fill: true,
       backgroundColor: [

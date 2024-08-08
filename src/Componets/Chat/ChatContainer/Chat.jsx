@@ -9,11 +9,9 @@ import { depCountActions } from '../../../store/depCount';
 import { useDispatch, useSelector } from 'react-redux';
 import Messages from '../Messages/Messages';
 
-
 const socket = io('http://localhost:5000');
 
 function Chat() {
-    
     axios.defaults.withCredentials = true;
 
     const dispatch = useDispatch();
@@ -21,7 +19,6 @@ function Chat() {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([]);
-    const [notifications, setNotifications] = useState([]);
     const userId = localStorage.getItem("userId");
 
     const dep = useSelector(state => state.count?.depValue);
@@ -32,34 +29,6 @@ function Chat() {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    useEffect(() => {
-        socket.on('receiveMessage', (data) => {
-            setMessages((prevMessages) => [...prevMessages, data]);
-            scrollToBottom();
-        });
-
-        socket.on('receiveNotification', (data) => {
-            if (data.sender !== userId) { // Only show notification if the message is not from the current user
-                setNotifications((prevNotifications) => [...prevNotifications, { ...data, timestamp: new Date() }]);
-            }
-        });
-
-        return () => {
-            socket.off('receiveMessage');
-            socket.off('receiveNotification');
-        };
-    }, []);
-
-    useEffect(() => {
-        if (userId) {
-            socket.emit('joinRoom', userId);
-        }
-    }, [userId]);
-
-    const handleDepCount = () => {
-        dispatch(depCountActions.handleCount());
-    };
-
     const sendMessage = () => {
         handleDepCount();
         const newMessage = {
@@ -67,29 +36,56 @@ function Chat() {
             receiver: receiverId,
             message
         };
+        console.log('Sending message:', newMessage);
         socket.emit('sendMessage', newMessage);
         setMessages((prevMessages) => [...prevMessages, newMessage]);
         setMessage('');
         scrollToBottom();
     };
 
-    const fetchMessages = async () => {
-        if (!receiverId) return;
-        try {
-            const response = await axios.post('http://localhost:5000/messages', {
-                sender: userId,
-                receiver: receiverId
-            });
-            setMessages(response.data);
-            scrollToBottom();
-        } catch (error) {
-            console.error("Error fetching messages", error);
-        }
-    };
 
     useEffect(() => {
-        fetchMessages();
-    }, [receiverId, dep]);
+        socket.on('receiveMessage', (data) => {
+            console.log('Message received:', data);
+            setMessages((prevMessages) => [...prevMessages, data]);
+            scrollToBottom();
+        });
+
+        return () => {
+            socket.off('receiveMessage');
+        };
+    }, [socket]);
+
+    useEffect(()=>{
+        if(userId){
+            socket.emit("joinRoom", userId)
+        }
+    }, [userId])
+
+    const handleDepCount = () => {
+        dispatch(depCountActions.handleCount());
+    };
+
+   
+
+    useEffect(()=>{
+        const fetchMessages = async () => {
+            if (!receiverId) return;
+            try {
+                const response = await axios.post('http://localhost:5000/messages', {
+                    sender: userId,
+                    receiver: receiverId
+                });
+                console.log(response)
+                setMessages(response.data);
+                scrollToBottom();
+            } catch (error) {
+                console.error("Error fetching messages", error);
+            }
+        };
+        fetchMessages()
+    }, [])
+
 
     const handleGetUser = (id) => {
         setReceiverId(id);
@@ -129,11 +125,11 @@ function Chat() {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             className='chat-input'
-                            disabled={receiverId===null?true:false}
+                            disabled={receiverId === null}
                         />
                         <button 
-                         onClick={sendMessage} className='chat-btn'
-                         disabled={message===""?true:false}
+                            onClick={sendMessage} className='chat-btn'
+                            disabled={message === ""}
                         >
                             <Send />
                         </button>

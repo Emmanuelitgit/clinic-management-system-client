@@ -39,10 +39,9 @@ const Login = () => {
   
   const handleLogin = async () => {
     try {
-      const response = await axios.post("https://clinic-server-o79p.onrender.com/login", credential, {
+      const response = await axios.post("http://localhost:5000/login", credential, {
         withCredentials: true,
       });
-      console.log(response.data)
   
       if (response?.status === 200) {
         const { role } = response.data.data[0]; 

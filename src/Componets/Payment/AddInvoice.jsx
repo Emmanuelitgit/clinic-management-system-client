@@ -33,6 +33,10 @@ export default function AddInvoice() {
 
   axios.defaults.withCredentials = true;
 
+  const [loading, setLoading] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState(null);
+  const [error, setError] = useState(null);
+  const [reference, setReference] = useState()
   const [open, setOpen] = React.useState(false);
   const[description, setDescription] = useState()
   const [data, setData] = useState({
@@ -90,6 +94,40 @@ export default function AddInvoice() {
   const handleDepCount =()=>{
     dispatch(depCountActions.handleCount())
   }
+
+  const handlePayment = async () => {
+    try {
+        const response = await axios.post('http://localhost:5000/initialize-payment', {
+          email:"eyidana001@gmail.com",
+          amount:25 
+        });
+        const { authorization_url } = response.data.data;
+        const { reference } = response.data.data;
+        setReference(reference)
+        window.location.href = authorization_url;
+    } catch (error) {
+       console.log(error);
+    }
+};
+
+
+useEffect(() => {
+  const verifyPayment = async () => {
+      try {
+          if(reference){
+            const response = await axios.get(`http://localhost:5000/verify-payment/${reference}`);
+            setPaymentStatus(response.data.data.status);
+          }
+      } catch (error) {
+        console.log(error)
+          setError(error.response ? error.response.data : 'An error occurred');
+      } finally {
+          setLoading(false);
+      }
+  };
+  verifyPayment();
+}, [reference]);
+
   
   const handleSubmit = async() => {
     try {
@@ -199,7 +237,7 @@ export default function AddInvoice() {
         </DialogContent>
         <DialogActions>
           <button autoFocus 
-            onClick={handleSubmit}
+            onClick={handlePayment}
             className='modal-btn'
             >
             Save changes

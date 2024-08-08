@@ -24,7 +24,7 @@ const ChatNavbar = ({ receiverId }) => {
                 }
                 setUser(response.data);
             } catch (error) {
-                console.log("an error occurred");
+                console.log(error);
             }
         };
         getUsers();

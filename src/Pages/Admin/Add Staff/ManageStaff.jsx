@@ -41,7 +41,6 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
     department: "",
   });
 
-  console.log(profile)
   const dispatch = useDispatch();
 
   const handleClickOpen = () => {

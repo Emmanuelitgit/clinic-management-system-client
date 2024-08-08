@@ -24,7 +24,6 @@ const DoctorBoxes = () => {
     const death_report = reports?.filter((data) => data?.report_type?.toLowerCase() === "death report");
     const operation_report = reports?.filter((data) => data?.report_type?.toLowerCase() === "operation report");
 
-
     useEffect(()=>{
         dispatch(getPatients())
        },[dep]);
@@ -67,13 +66,6 @@ const DoctorBoxes = () => {
         total: appointments?.length
       },
       {
-        id:8,
-        name:"Prescription",
-        background:"bg-success",
-        link:'/doctor/prescription-list',
-        total: prescriptions?.length
-      },
-      {
         id:9,
         name:"Blood Bank",
         background:"purple",
@@ -107,6 +99,13 @@ const DoctorBoxes = () => {
         background:"bg-info",
         link:'/doctor/bed-allotment-list',
         total: bedAllotments?.length
+      },
+       {
+        id:8,
+        name:"Prediction",
+        background:"bg-success",
+        link:'/doctor/prescription-list',
+        // total: prescriptions?.length
       },
       ]
 

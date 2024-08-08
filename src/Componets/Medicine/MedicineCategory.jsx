@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const MedicineCategory = () => {
 
-  const role = localStorage.getItem("role");
+  const role = localStorage.getItem("role").toLocaleLowerCase();
   const [data, setData] = useState({ columns: [], rows: [] });
 
   const dep = useSelector(state => state.count?.depValue) || [2];
@@ -44,7 +44,7 @@ const MedicineCategory = () => {
                   { label: 'Category Name', field: 'name', sort: 'asc' },
                   { label: 'Description', field: 'description', sort: 'asc' },
               ];
-              if (role === "Pharmacist") {
+              if (role === "pharmacist") {
                   columns.push({ label: 'Actions', field: 'actions', sort: 'disabled' });
               }
 
@@ -72,9 +72,10 @@ const MedicineCategory = () => {
       fetchData();
   }, [dep]);
 
+
   return (
       <div className='main-border'>
-           {role === "Pharmacist"  &&
+           {role === "pharmacist"  &&
               <div className='add-btn-container'>
                   <AddMedicineCategory/>
               </div>

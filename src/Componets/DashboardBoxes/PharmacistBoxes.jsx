@@ -15,7 +15,7 @@ const PharmacistBoxes = () => {
     const dep = useSelector(state => state?.count?.depValue) || [2];
     const medicineCategories = useSelector((state)=>state?.data?.medicineCategories);
     const medicineList = useSelector((state)=>state?.data?.medicineList);
-    const prescriptions = useSelector((state)=>state?.data?.prescCountPharmacist);
+    const prescriptions = useSelector((state)=>state?.data?.prescriptions);
 
 
     useEffect(()=>{

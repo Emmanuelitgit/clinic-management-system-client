@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const MedicineList = () => {
 
-  const role = localStorage.getItem("role");
+  const role = localStorage.getItem("role").toLocaleLowerCase();
   const [data, setData] = useState({ columns: [], rows: [] });
 
   const dep = useSelector(state => state.count?.depValue) || [2];
@@ -44,7 +44,7 @@ const MedicineList = () => {
                   { label: 'Manufacturer', field: 'manufacturer', sort: 'asc' },
                   { label: 'Status', field: 'status', sort: 'asc' },
               ];
-              if (role === "Pharmacist") {
+              if (role === "pharmacist") {
                   columns.push({ label: 'Actions', field: 'actions', sort: 'disabled' });
               }
 
