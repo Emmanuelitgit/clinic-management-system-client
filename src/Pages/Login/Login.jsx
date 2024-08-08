@@ -21,7 +21,7 @@ const Login = () => {
     password:'',
     role:''
   });
-
+  const [loading, setLoading] = useState(false)
   const [err, setErr] = useState();
   const [showPassword, setShowPassword] = useState(false)
 
@@ -38,8 +38,9 @@ const Login = () => {
   axios.defaults.withCredentials=true;
   
   const handleLogin = async () => {
+    setLoading(true)
     try {
-      const response = await axios.post("http://localhost:5000/login", credential, {
+      const response = await axios.post("https://clinic-server-o79p.onrender.com/login", credential, {
         withCredentials: true,
       });
   
@@ -84,6 +85,8 @@ const Login = () => {
       }else if(error.response?.status === 400){
         dispatch(handleToastError("Wrong username or password"))
       }
+    }finally{
+      setLoading(false)
     }
   };  
   
@@ -150,11 +153,23 @@ const handleShowPassword = () => {
           }
         </div>
         <div className="button-container">
-          <input type="submit" 
+          {/* <input type="submit" 
           title='Sigin' 
           className='button' 
           onClick={handleLogin} 
-          />
+          /> */}
+          <button 
+            className="button" type="button" 
+            onClick={handleLogin}
+            >
+             {loading && 
+              <div>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span>Loading...</span>
+              </div>
+              }
+              {!loading && <span>Login</span>}
+           </button>
         </div>
         <p className='copyright'>@2024 Clinic Management System. Developed by Emmanuel Yidana</p>
       </div>

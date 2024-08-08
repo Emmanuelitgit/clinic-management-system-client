@@ -43,6 +43,7 @@ export default function AddInvoice() {
     title:'',
     amount:'',
     patient_id:null,
+    email:'',
     accountant_id:'',
     date:'',
     status:'',
@@ -95,20 +96,20 @@ export default function AddInvoice() {
     dispatch(depCountActions.handleCount())
   }
 
-  const handlePayment = async () => {
-    try {
-        const response = await axios.post('http://localhost:5000/initialize-payment', {
-          email:"eyidana001@gmail.com",
-          amount:25 
-        });
-        const { authorization_url } = response.data.data;
-        const { reference } = response.data.data;
-        setReference(reference)
-        window.location.href = authorization_url;
-    } catch (error) {
-       console.log(error);
-    }
-};
+//   const handlePayment = async () => {
+//     try {
+//         const response = await axios.post('http://localhost:5000/initialize-payment', {
+//           email:"eyidana001@gmail.com",
+//           amount:25 
+//         });
+//         const { authorization_url } = response.data.data;
+//         const { reference } = response.data.data;
+//         setReference(reference)
+//         window.location.href = authorization_url;
+//     } catch (error) {
+//        console.log(error);
+//     }
+// };
 
 
 useEffect(() => {
@@ -131,11 +132,16 @@ useEffect(() => {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_invoice`, data);
+      const response = await axios.post(`http://localhost:5000/add_invoice`, {
+        ...data, amount:parseFloat(data.amount)
+      });
       if(response.status === 201){
         handleDepCount()
         handleClose()
         dispatch(handleToastSuccess("Created Successfully"))
+        const { authorization_url } = response.data.data;
+        const { reference } = response.data.data;
+        window.location.href = authorization_url;
       }
     } catch (error) {
       dispatch(handleToastError('Error! cannot perform operation'))
@@ -172,12 +178,13 @@ useEffect(() => {
         <DialogContent dividers >
         <div className='input-container'>
             <label htmlFor="">Title</label>
-            <input type="text"
-              className='input'
-              placeholder='eg Emmanuel Yidana'
-              name='title'
-              onChange={handleChange} 
-            />
+           <select name="title" id="" onChange={handleChange} className='dropdown'>
+            <option value="">--Select Ttitle--</option>
+            <option value="Consultation">Medical Consulatiton</option>
+            <option value="Review">Medical Review</option>
+            <option value="Hepatities Test">Hepatities Test</option>
+            <option value="Malaria Test">Malaria Test</option>
+           </select>
           </div>
           <div className='input-container'>
             <label htmlFor="">Ammount</label>
@@ -199,6 +206,15 @@ useEffect(() => {
               ))}
             </select>
         </div>
+        <div className='input-container'>
+            <label htmlFor="">Email:</label>
+            <input type="email"
+              className='input'
+              placeholder='eg eyidana001@gmail.com'
+              name='email'
+              onChange={handleChange}  
+            />
+          </div>
         <div className='input-container'>
           <label htmlFor="">Accountant</label>
             <select name="accountant_id" onChange={handleChange} value={data.doctor}  className='dropdown'>
@@ -237,7 +253,7 @@ useEffect(() => {
         </DialogContent>
         <DialogActions>
           <button autoFocus 
-            onClick={handlePayment}
+            onClick={handleSubmit}
             className='modal-btn'
             >
             Save changes
