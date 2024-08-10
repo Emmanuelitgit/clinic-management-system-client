@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { depCountActions } from '../../../store/depCount';
 import axios from "axios";
 import {handleToastSuccess, handleToastError} from "../../../store/modalState"
+import api from '../../../api';
 
 
 
@@ -70,7 +71,7 @@ export default function ManageSettings({name,email,phone,language,currency,addre
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_setting/${id}`, data);
+      const response = await api.put(`/update_setting/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

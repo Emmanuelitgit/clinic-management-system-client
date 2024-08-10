@@ -16,6 +16,7 @@ import { getBeds, getPatients } from '../../store/data';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -81,7 +82,7 @@ export default function AddAllotment() {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_bed_allotment`, data);
+      const response = await api.post(`/add_bed_allotment`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

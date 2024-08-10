@@ -18,6 +18,7 @@ import { useLocation } from 'react-router-dom';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 
@@ -114,7 +115,7 @@ export default function ManageReport({name,id,patient_id,patient_name,doctor_nam
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_report/${id}`, data);
+      const response = await api.put(`/update_report/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -128,7 +129,7 @@ export default function ManageReport({name,id,patient_id,patient_name,doctor_nam
   
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_report/${id}`);
+      const response = await api.delete(`/remove_report/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

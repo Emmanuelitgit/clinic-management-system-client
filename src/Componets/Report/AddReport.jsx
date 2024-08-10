@@ -17,6 +17,7 @@ import { getStaff, getPatients } from '../../store/data';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -86,7 +87,7 @@ export default function AddReport({name}) {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_report`, data);
+      const response = await api.post(`/add_report`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

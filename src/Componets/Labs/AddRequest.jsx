@@ -14,7 +14,7 @@ import { depCountActions } from '../../store/depCount';
 import axios from "axios";
 import { getStaff, getPatients } from '../../store/data';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
-
+import api from "../../api"
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -74,7 +74,7 @@ export default function AddRequest() {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_request`, data);
+      const response = await api.post(`/add_request`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

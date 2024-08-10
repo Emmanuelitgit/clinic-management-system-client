@@ -8,6 +8,7 @@ import AddStaff from '../Add Staff/AddStaff';
 import ManageStaff from '../Add Staff/ManageStaff';
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../../api';
 
 
 const LaboratoristList = () => {
@@ -25,14 +26,11 @@ const LaboratoristList = () => {
       const fetchData = async () => {
         try {
 
-          const response = await fetch(`http://localhost:5000/staff/${role}`, {
-            method: 'GET',
-            credentials: 'include', // Important for including cookies
-        })
-          if(!response.ok){
-            throw new Error("faild to fetch")
-          }
-          const fetchedData = await response.json()
+          const response = await api.get(`/staff/${role}`, {
+            withCredentials: true,
+        });
+  
+        const fetchedData = response.data;
 
           const transformedData = {
             columns: [

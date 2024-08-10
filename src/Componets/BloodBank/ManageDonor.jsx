@@ -17,6 +17,7 @@ import { depCountActions } from '../../store/depCount';
 import axios from "axios";
 import { getBloodGroup } from '../../store/data';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -87,7 +88,7 @@ export default function ManageDonor({name, id}) {
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_blood_donor/${id}`, data);
+      const response = await api.put(`/update_blood_donor/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -100,7 +101,7 @@ export default function ManageDonor({name, id}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_blood_donor/${id}`);
+      const response = await api.delete(`/remove_blood_donor/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

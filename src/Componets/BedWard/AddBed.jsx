@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { toast, Toaster } from 'react-hot-toast';
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -70,7 +71,7 @@ export default function AddBed() {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_bed`, data);
+      const response = await api.post(`/add_bed`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

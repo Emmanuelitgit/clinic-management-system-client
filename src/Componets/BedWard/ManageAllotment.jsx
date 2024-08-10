@@ -16,6 +16,7 @@ import axios from "axios";
 import { getBeds, getPatients } from '../../store/data';
 import { useLocation } from 'react-router-dom';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -100,7 +101,7 @@ export default function ManageAllotment(
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_bed_allotment/${id}`, data);
+      const response = await api.put(`/update_bed_allotment/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -113,7 +114,7 @@ export default function ManageAllotment(
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_bed_allotment/${id}`);
+      const response = await api.delete(`/remove_bed_allotment/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

@@ -7,6 +7,7 @@ import { tableData } from '../../utils/Data';
 import AddBed from './AddBed';
 import ManageBed from './ManageBed';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 
 const BedList = ({ admin }) => {
@@ -18,14 +19,11 @@ const BedList = ({ admin }) => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/beds', {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
+            const response = await api.get('/beds', {
+                withCredentials: true,
             });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
+
+            const fetchedData = response.data;
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc',  },

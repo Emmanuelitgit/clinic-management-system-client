@@ -16,6 +16,7 @@ import { depCountActions } from '../../../store/depCount';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../../store/modalState"
+import api from '../../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -73,7 +74,7 @@ export default function ManageDepartment({name, id, desc}) {
 
   const handleUpdate = async() =>{
     try {
-      const response = await axios.put(`http://localhost:5000/update_department/${id}`, data);
+      const response = await api.put(`/update_department/${id}`, data);
       if(response.status === 201){
         handleClose()
         handleDepCount()
@@ -86,7 +87,7 @@ export default function ManageDepartment({name, id, desc}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_department/${id}`);
+      const response = await api.delete(`/remove_department/${id}`);
       if(response.status===200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Link, useNavigate, } from "react-router-dom"
+import api from "../api";
 
 
 
 
 export const login = createAsyncThunk("login", async(credential)=>{
     try {
-        const response = await axios.post("http://localhost:5000/login", credential);
+        const response = await api.post("/login", credential);
         console.log(response)
         if (response.status === 200) {
           const { role } = response.data?.data[0]; 

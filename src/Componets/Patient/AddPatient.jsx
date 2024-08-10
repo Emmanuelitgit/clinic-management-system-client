@@ -13,6 +13,7 @@ import { depCountActions } from '../../store/depCount';
 import axios from "axios";
 import { useDispatch} from 'react-redux';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -66,7 +67,7 @@ export default function AddPatient() {
     try{
         const formData = new FormData();
         formData.append("file", file)
-        const res = await axios.post("http://localhost:5000/upload", formData)
+        const res = await api.post("/upload", formData)
         return res.data
     }catch(err){
         console.log(err)
@@ -76,7 +77,7 @@ export default function AddPatient() {
   const handleSubmit = async() => {
     const imgUrl = await upload()
     try {
-      const response = await axios.post(`http://localhost:5000/add_patient`, {
+      const response = await api.post(`/add_patient`, {
         name:data.name,
         email:data.email, 
         phone:data.phone, 

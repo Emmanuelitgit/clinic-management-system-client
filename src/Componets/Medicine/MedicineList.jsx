@@ -7,6 +7,7 @@ import { tableData } from '../../utils/Data';
 import AddMedicine from './AddMedicine';
 import ManageMedicine from './ManageMedicine';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 
 const MedicineList = () => {
@@ -26,14 +27,11 @@ const MedicineList = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/medicine_list', {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
+            const response = await api.get('/medicine_list', {
+                withCredentials: true,
             });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
+
+            const fetchedData = response.data;
 
               // Define columns based on role
               const columns = [

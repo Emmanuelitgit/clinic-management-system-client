@@ -13,6 +13,7 @@ import axios from "axios";
 import { depCountActions } from '../../../store/depCount';
 import ReactQuill from "react-quill";
 import {handleToastSuccess, handleToastError} from "../../../store/modalState"
+import api from '../../../api';
 
 
 
@@ -68,7 +69,7 @@ export default function AddDepartment() {
   const handleSubmit = async() =>{
     try {
       const accessToken = localStorage.getItem("token")
-      const response = await axios.post(`http://localhost:5000/add_department`, data, {
+      const response = await api.post(`/add_department`, data, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json'

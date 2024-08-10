@@ -5,6 +5,7 @@ import AddDepartment from "./AddDepartment";
 import ManageDepartment from "./ManageDepartment"
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios";
+import api from '../../../api';
 
 
 
@@ -24,15 +25,11 @@ const DatatablePage = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const accessToken = localStorage.getItem("token")
-          const response = await fetch(`http://localhost:5000/departments`, {
-            method: 'GET',
-            credentials: 'include', // Important for including cookies
-        })
-          if(!response.ok){
-            throw new Error("faild to fetch")
-          }
-          const fetchedData = await response.json()
+          const response = await api.get('/departments', {
+            withCredentials: true,
+        });
+
+        const fetchedData = response.data;
 
           const transformedData = {
             columns: [

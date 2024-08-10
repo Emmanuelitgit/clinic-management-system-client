@@ -16,6 +16,7 @@ import axios from "axios";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -86,7 +87,7 @@ export default function ManageMedicine({name, id}) {
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_medicine/${id}`, data);
+      const response = await api.put(`/update_medicine/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -99,7 +100,7 @@ export default function ManageMedicine({name, id}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_medicine/${id}`);
+      const response = await api.delete(`/remove_medicine/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

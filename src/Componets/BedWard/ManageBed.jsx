@@ -16,6 +16,7 @@ import { depCountActions } from '../../store/depCount';
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -80,7 +81,7 @@ export default function ManageBed({name, id}) {
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_bed/${id}`, data);
+      const response = await api.put(`/update_bed/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -93,7 +94,7 @@ export default function ManageBed({name, id}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_bed/${id}`);
+      const response = await api.delete(`/remove_bed/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

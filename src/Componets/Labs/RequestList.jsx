@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleResultModal, handleLabReport } from '../../store/modalState';
 import AddResult from './AddResult';
 import StatusDropdown from '../Buttons/StatusDropdown';
+import api from '../../api';
 
 
 const RequestList = () => {
@@ -52,14 +53,11 @@ const RequestList = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch(`http://localhost:5000/${type}`, {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
-            });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
+            const response = await api.get(`/${type}`, {
+              withCredentials: true,
+          });
+
+          const fetchedData = response.data;
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc',  },

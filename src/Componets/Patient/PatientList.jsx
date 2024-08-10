@@ -4,6 +4,7 @@ import { MDBDataTable } from 'mdbreact';
 import AddPatient from './AddPatient';
 import ManagePatient from './ManagePatient';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 const PatientList = () => {
 
@@ -16,14 +17,11 @@ const PatientList = () => {
       const fetchData = async () => {
           try {
             // if(accessToken){
-                const response = await fetch(`http://localhost:5000/patients`, {
-                    method: 'GET',
-                    credentials: 'include', // Important for including cookies
-                })
-                if(!response.ok){
-                  throw new Error("faild to fetch")
-                }
-                const fetchedData = await response.json()
+                const response = await api.get('/patients', {
+                    withCredentials: true,
+                });
+  
+                const fetchedData = response.data;
     
                   const columns = [
                       { label: 'ID', field: 'id', sort: 'asc' },

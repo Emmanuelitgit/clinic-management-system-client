@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CDropdownToggle,  CDropdownMenu, CDropdownItem, CDropdown} from '@coreui/react'
 import { depCountActions } from '../../store/depCount';
 import StatusDropdown from '../Buttons/StatusDropdown';
+import api from '../../api';
 
 
 const PrescriptionList = () => {
@@ -38,14 +39,11 @@ const PrescriptionList = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/prescriptions', {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
-            });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
+            const response = await api.get('/prescriptions', {
+              withCredentials: true,
+          });
+
+          const fetchedData = response.data;
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc',  },

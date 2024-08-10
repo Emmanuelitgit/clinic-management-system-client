@@ -5,6 +5,7 @@ import { Folder, Delete, Update, Add } from '@mui/icons-material';
 import Button from '../Buttons/Button';
 import { tableData } from '../../utils/Data';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 
 
@@ -16,14 +17,11 @@ const PaymentList = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch('http://localhost:5000/invoice_list', {
-            method: 'GET',
-            credentials: 'include', // Important for including cookies
+          const response = await api.get('/invoice_list', {
+            withCredentials: true,
         });
-          if (!response.ok) {
-            throw new Error('Failed to fetch data');
-          }
-          const fetchedData = await response.json();
+
+        const fetchedData = response.data;
   
           const transformedData = {
             columns: [

@@ -17,6 +17,7 @@ import { v4 as uuidv4 } from 'uuid'
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 
@@ -116,7 +117,7 @@ useEffect(() => {
   const verifyPayment = async () => {
       try {
           if(reference){
-            const response = await axios.get(`http://localhost:5000/verify-payment/${reference}`);
+            const response = await api.get(`/verify-payment/${reference}`);
             setPaymentStatus(response.data.data.status);
           }
       } catch (error) {
@@ -132,7 +133,7 @@ useEffect(() => {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_invoice`, {
+      const response = await api.post(`/add_invoice`, {
         ...data, amount:parseFloat(data.amount)
       });
       if(response.status === 201){

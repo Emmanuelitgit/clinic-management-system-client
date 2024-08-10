@@ -17,6 +17,7 @@ import { getStaff, getPatients } from '../../store/data';
 import 'react-quill/dist/quill.snow.css';
 import { useLocation } from 'react-router-dom';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -103,7 +104,7 @@ export default function ManageRequest(
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_request/${id}`, data);
+      const response = await api.put(`/update_request/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -116,7 +117,7 @@ export default function ManageRequest(
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_request/${id}`);
+      const response = await api.delete(`/remove_request/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

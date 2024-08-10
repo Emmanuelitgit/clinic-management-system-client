@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ActionBtn from '../Buttons/ActionBtn';
 import { Link, useNavigate } from "react-router-dom"
 import { useLocation } from 'react-router-dom';
+import api from '../../api';
 
 
 const ResultList = () => {
@@ -39,15 +40,11 @@ const ResultList = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/${type}`, {
-            method: 'GET',
-            credentials: 'include', // Important for including cookies
+          const response = await api.get(`/${type}`, {
+            withCredentials: true,
         });
-          if (!response.ok) {
-            throw new Error('Failed to fetch data');
-          }
-        
-          const fetchedData = await response.json();
+
+        const fetchedData = response.data;
   
           const transformedData = {
             columns: [

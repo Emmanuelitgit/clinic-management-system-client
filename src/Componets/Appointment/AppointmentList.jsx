@@ -4,34 +4,29 @@ import { MDBDataTable } from 'mdbreact';
 import AddAppointment from './AddAppointment';
 import ManageAppointment from './ManageAppointment';
 import { useDispatch, useSelector } from 'react-redux';
-
+import axios from 'axios';
+import api from '../../api';
 
 const AppointmentList = () => {
 
   const role = localStorage.getItem("role").toLowerCase();
   const [data, setData] = useState({ columns: [], rows: [] });
   
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const dep = useSelector(state => state.count?.depValue) || [2];
-  // const role = useSelector(state => state.auth?.role) || [];
-
 
   useEffect(() => {
       const fetchData = async () => {
           try {
+              const response = await api.get('/appointments', {
+                  withCredentials: true,
+              });
 
-            const response = await fetch(`http://localhost:5000/appointments`, {
-              method: 'GET',
-              credentials: 'include', // Important for including cookies
-          })
-            if(!response.ok){
-              throw new Error("faild to fetch")
-            }
-            const fetchedData = await response.json()
+              const fetchedData = response.data;
 
               const columns = [
-                { label: 'ID', field: 'id', sort: 'asc',  },
+                { label: 'ID', field: 'id', sort: 'asc' },
                 { label: 'Date', field: 'date', sort: 'asc' },
                 { label: 'Patient', field: 'patient', sort: 'asc' },
                 { label: 'Doctor', field: 'doctor', sort: 'asc' },
@@ -39,9 +34,9 @@ const AppointmentList = () => {
 
               if (role === "nurse") {
                   columns.push({ label: 'Actions', field: 'actions', sort: 'disabled' });
-              }else if (role === "doctor") {
-                columns.push({ label: 'Actions', field: 'actions', sort: 'disabled' });
-            }
+              } else if (role === "doctor") {
+                  columns.push({ label: 'Actions', field: 'actions', sort: 'disabled' });
+              }
 
               const transformedData = {
                   columns: columns,
@@ -52,15 +47,15 @@ const AppointmentList = () => {
                       doctor: item.doctor_name,
                       actions: (
                           <ManageAppointment
-                          name={"Appointment"}
-                          id={item.appointment_id}
-                          patient_id={item.patient_id}
-                          date={item.date}
-                          doctor_id={item.doctor_id}
-                          doctor_name={item.doctor_name}
-                          patient_name={item.patient_name}
-                          title={item.title}
-                          desc={item.description}
+                              name={"Appointment"}
+                              id={item.appointment_id}
+                              patient_id={item.patient_id}
+                              date={item.date}
+                              doctor_id={item.doctor_id}
+                              doctor_name={item.doctor_name}
+                              patient_name={item.patient_name}
+                              title={item.title}
+                              desc={item.description}
                           />
                       )
                   })),
@@ -75,15 +70,14 @@ const AppointmentList = () => {
       fetchData();
   }, [dep]);
 
-
   return (
       <div className='main-border'>
-           {role === "doctor"  &&
+           {role === "doctor" &&
               <div className='add-btn-container'>
                  <AddAppointment/>
               </div>
           }
-          {role === "nurse"  &&
+          {role === "nurse" &&
             <div className='add-btn-container'>
               <AddAppointment/>
             </div>

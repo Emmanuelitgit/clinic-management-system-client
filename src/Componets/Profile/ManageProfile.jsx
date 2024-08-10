@@ -13,6 +13,7 @@ import { depCountActions } from '../../store/depCount';
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { handleToastError, handleToastSuccess } from '../../store/modalState';
+import api from '../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -76,7 +77,7 @@ export default function ManageProfile({ name,backgroundColor,padding,color,width
   const handleSubmit = async () => {
     const userId = localStorage.getItem("userId");
     try {
-      const response = await axios.put(`http://localhost:5000/update_staff/${userId}`, data);
+      const response = await api.put(`/update_staff/${userId}`, data);
       if (response.status === 201) {
         handleDepCount();
         handleClose();
@@ -91,14 +92,11 @@ export default function ManageProfile({ name,backgroundColor,padding,color,width
     const getStaff = async () => {
       const id = localStorage.getItem("userId");
       try {
-        const response = await fetch(`http://localhost:5000/single_staff/${id}`, {
-          method: 'GET',
-          credentials: 'include', // Important for including cookies
+        const response = await api.get(`/single_staff/${id}`, {
+          withCredentials: true,
       });
-        if (!response.ok) {
-          console.log("Failed to fetch data...");
-        }
-        const fetchedData = await response.json();
+
+      const fetchedData = response.data;
         setStaff(fetchedData);
       } catch (error) {
         console.log(error);

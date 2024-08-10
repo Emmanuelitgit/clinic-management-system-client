@@ -14,6 +14,7 @@ import { depCountActions } from '../../../store/depCount';
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { handleToastError, handleToastSuccess } from '../../../store/modalState';
+import api from '../../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -47,7 +48,7 @@ export default function AddStaff({name}) {
     try{
         const formData = new FormData();
         formData.append("file", file)
-        const res = await axios.post("http://localhost:5000/upload", formData)
+        const res = await api.post("/upload", formData)
         return res.data
     }catch(err){
         console.log(err)
@@ -83,7 +84,7 @@ export default function AddStaff({name}) {
     try {
       const accessToken = localStorage.getItem("token")
       if(accessToken){
-        const response = await axios.post(`http://localhost:5000/add_staff`, {
+        const response = await api.post(`/add_staff`, {
           name:data.name,
           role:data.role,
           phone:data.phone,

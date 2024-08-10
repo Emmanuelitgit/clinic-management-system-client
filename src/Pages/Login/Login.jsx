@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { login } from '../../store/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToastError, handleToastSuccess } from '../../store/modalState';
-
+import api from '../../api';
 
 
 const Login = () => {
@@ -40,7 +40,7 @@ const Login = () => {
   const handleLogin = async () => {
     setLoading(true)
     try {
-      const response = await axios.post("https://clinic-server-o79p.onrender.com/login", credential, {
+      const response = await api.post("/login", credential, {
         withCredentials: true,
       });
   

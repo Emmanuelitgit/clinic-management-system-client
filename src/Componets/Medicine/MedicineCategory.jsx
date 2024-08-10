@@ -7,6 +7,7 @@ import { tableData } from '../../utils/Data';
 import AddMedicineCategory from './AddMedicineCategory';
 import ManageMedicineCategory from './ManageMedicineCategory';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 
 
@@ -29,16 +30,12 @@ const MedicineCategory = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/medicine_categories', {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
+            const response = await api.get('/medicine_categories', {
+                withCredentials: true,
             });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
 
-              // Define columns based on role
+            const fetchedData = response.data;
+
               const columns = [
                   { label: 'ID', field: 'id', sort: 'asc' },
                   { label: 'Category Name', field: 'name', sort: 'asc' },

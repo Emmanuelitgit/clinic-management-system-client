@@ -10,6 +10,7 @@ import ActionBtn from '../Buttons/ActionBtn';
 import { useDispatch, useSelector } from 'react-redux';
 import StatusDropdown from '../Buttons/StatusDropdown';
 import axios from 'axios';
+import api from '../../api';
 
 
 const InvoiceList = () => {
@@ -31,16 +32,11 @@ const InvoiceList = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/invoice_list', {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
+            const response = await api.get('/invoice_list', {
+                withCredentials: true,
             });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
 
-              console.log(fetchedData)
+            const fetchedData = response.data;
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc' },

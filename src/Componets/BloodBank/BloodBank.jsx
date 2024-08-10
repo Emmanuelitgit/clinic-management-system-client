@@ -7,6 +7,7 @@ import { tableData } from '../../utils/Data';
 import ManageBloodBank from './ManageBloodBank';
 import AddBloodBank from './AddBloodBank';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../api';
 
 
 const BloodBank = () => {
@@ -18,14 +19,11 @@ const BloodBank = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch('http://localhost:5000/blood_bank_list', {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
+            const response = await api.get('/blood_bank_list', {
+                withCredentials: true,
             });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
+
+            const fetchedData = response.data;
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc',  },

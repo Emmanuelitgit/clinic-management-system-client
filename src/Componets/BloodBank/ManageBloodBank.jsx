@@ -17,6 +17,7 @@ import { depCountActions } from '../../store/depCount';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 
@@ -83,7 +84,7 @@ export default function ManageBloodBank({name, id, blood_group, status}) {
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_blood_bank/${id}`, data);
+      const response = await api.put(`/update_blood_bank/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -96,7 +97,7 @@ export default function ManageBloodBank({name, id, blood_group, status}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_blood_bank/${id}`);
+      const response = await api.delete(`/remove_blood_bank/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

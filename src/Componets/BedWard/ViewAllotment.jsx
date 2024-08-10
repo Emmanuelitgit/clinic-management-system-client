@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import doctor from "../../Componets/images/staff/doctor 1.png";
 import { useLocation } from 'react-router-dom';
-
+import api from '../../api';
 
 const ViewAllotment = () => {
 
@@ -23,14 +23,11 @@ const ViewAllotment = () => {
     useEffect(()=>{
         const getStaff = async()=>{
             try {
-            const response = await fetch(`http://localhost:5000/bed_allotment/${id}`, {
-              method: 'GET',
-              credentials: 'include', // Important for including cookies
-          })
-            if(!response.ok){
-            console.log("faild to fetch data...")
-            }
-            const fetchedData = await response.json()
+              const response = await api.get(`/bed_allotment/${id}`, {
+                withCredentials: true,
+            });
+
+            const fetchedData = response.data;
             setData(fetchedData)
             } catch (error) {
                 console.log(error)

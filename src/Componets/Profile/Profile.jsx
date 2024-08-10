@@ -5,6 +5,7 @@ import AddStaff from "../../Pages/Admin/Add Staff/AddStaff";
 import ManageProfile from './ManageProfile';
 import { Man } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
+import api from '../../api';
 
 const Profile = () => {
 
@@ -31,14 +32,11 @@ const Profile = () => {
         const getStaff = async()=>{
           const id =localStorage.getItem("userId")
             try {
-            const response = await fetch(`http://localhost:5000/single_staff/${id}`, {
-              method: 'GET',
-              credentials: 'include', // Important for including cookies
-          })
-            if(!response.ok){
-            console.log("faild to fetch data...")
-            }
-            const fetchedData = await response.json()
+              const response = await api.get(`/single_staff/${id}`, {
+                withCredentials: true,
+            });
+
+            const fetchedData = response.data;
             const { profile } = fetchedData[0];
             setProfile(profile)
             setData(fetchedData)

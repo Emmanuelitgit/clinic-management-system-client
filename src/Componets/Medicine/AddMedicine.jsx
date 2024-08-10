@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -60,14 +61,11 @@ export default function AddMedicine() {
   useEffect(()=>{
     const getCategories =async()=>{
       try {
-        const response = await fetch('http://localhost:5000/medicine_categories', {
-          method: 'GET',
-          credentials: 'include', // Important for including cookies
+        const response = await api.get('/medicine_categories', {
+          withCredentials: true,
       });
-        if(!response.ok){
-          throw new Error('Failed to fetch data');
-        }
-        const fetchedData = await response.json();
+
+      const fetchedData = response.data;
         setCategories(fetchedData)
       } catch (error) {
         console.log(error)

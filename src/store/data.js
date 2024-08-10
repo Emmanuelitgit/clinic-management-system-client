@@ -243,6 +243,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import api from "../api";
 
 axios.defaults.withCredentials = true;
 
@@ -250,7 +251,7 @@ export const getStaff = createAsyncThunk(
   "doctors",
   async (role, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/all_staff`, {
+      const response = await api.get(`http://localhost:5000/all_staff`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -267,7 +268,7 @@ export const getSingleStaff = createAsyncThunk(
   "staff",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/single_staff/${id}`, {
+      const response = await api.get(`http://localhost:5000/single_staff/${id}`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -284,7 +285,7 @@ export const getPatients = createAsyncThunk(
   "patients",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/patients`, {
+      const response = await api.get(`https://clinic-server-o79p.onrender.com/patients`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -301,7 +302,7 @@ export const getPatient = createAsyncThunk(
   "patient",
   async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/patient/${id}`, {
+      const response = await api.get(`http://localhost:5000/patient/${id}`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -318,7 +319,7 @@ export const getBeds = createAsyncThunk(
   "beds",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/beds`);
+      const response = await api.get(`http://localhost:5000/beds`);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -331,7 +332,7 @@ export const getBloodGroup = createAsyncThunk(
   "blood_group",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/blood_bank_list`, {
+      const response = await api.get(`http://localhost:5000/blood_bank_list`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -348,7 +349,7 @@ export const getReports = createAsyncThunk(
   "reports",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/reports`, {
+      const response = await api.get(`http://localhost:5000/reports`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -365,7 +366,7 @@ export const getAppointmentList = createAsyncThunk(
   "appointments",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/appointments`, {
+      const response = await api.get(`http://localhost:5000/appointments`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -382,7 +383,7 @@ export const getPrescription = createAsyncThunk(
   "prescription",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/prescriptions`, {
+      const response = await api.get(`http://localhost:5000/prescriptions`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -399,7 +400,7 @@ export const getBedAllotment = createAsyncThunk(
   "allotment",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/bed_allotments`, {
+      const response = await api.get(`http://localhost:5000/bed_allotments`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -416,7 +417,7 @@ export const getMedicineCategories = createAsyncThunk(
   "categories",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/medicine_categories`, {
+      const response = await api.get(`http://localhost:5000/medicine_categories`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -433,7 +434,7 @@ export const getMedicineList = createAsyncThunk(
   "medicineList",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/medicine_list`, {
+      const response = await api.get(`http://localhost:5000/medicine_list`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -450,7 +451,7 @@ export const getPrescriptionCountForPharmacist = createAsyncThunk(
   "presPharCount",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/prescriptions/count`, {
+      const response = await api.get(`http://localhost:5000/prescriptions/count`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -467,7 +468,7 @@ export const getInvoiceList = createAsyncThunk(
   "invoice",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/invoice_list`, {
+      const response = await api.get(`http://localhost:5000/invoice_list`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -484,7 +485,7 @@ export const getLabResult = createAsyncThunk(
   "lab",
   async (type, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/lab_result_list/${type}`, {
+      const response = await api.get(`http://localhost:5000/lab_result_list/${type}`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -501,7 +502,7 @@ export const getBloodDonors = createAsyncThunk(
   "donor",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/blood_donors`, {
+      const response = await api.get(`http://localhost:5000/blood_donors`, {
         headers: {
           'Content-Type': 'application/json'
         }

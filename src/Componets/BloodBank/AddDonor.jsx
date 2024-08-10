@@ -14,6 +14,7 @@ import { depCountActions } from '../../store/depCount';
 import axios from "axios";
 import { getBloodGroup } from '../../store/data';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -72,7 +73,7 @@ export default function AddDonor() {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_blood_donor`, data);
+      const response = await api.post(`/add_blood_donor`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -65,7 +66,7 @@ export default function AddMedicineCategory() {
   
   const handleSubmit = async() => {
     try {
-      const response = await axios.post(`http://localhost:5000/add_category`, data);
+      const response = await api.post(`/add_category`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()

@@ -18,6 +18,7 @@ import axios from "axios";
 import { getStaff, getPatients } from '../../store/data';
 import { useLocation } from 'react-router-dom';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 
@@ -96,7 +97,7 @@ export default function ManageVital({name, id, patient_id}) {
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_vital/${id}`, data);
+      const response = await api.put(`/update_vital/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -109,7 +110,7 @@ export default function ManageVital({name, id, patient_id}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_vital/${id}`);
+      const response = await api.delete(`/remove_vital/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

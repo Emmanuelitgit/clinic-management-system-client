@@ -15,6 +15,7 @@ import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import {getPatient} from "../../store/data"
+import api from '../../api';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -88,7 +89,7 @@ export default function ManagePatient({name,id,patient,age,sex,email,blood_group
     try{
         const formData = new FormData();
         formData.append("file", file)
-        const res = await axios.post("http://localhost:5000/upload", formData)
+        const res = await api.post("/upload", formData)
         return res.data
     }catch(err){
         console.log(err)
@@ -98,7 +99,7 @@ export default function ManagePatient({name,id,patient,age,sex,email,blood_group
   const handleUpdate = async() => {
     const imgUrl = await upload()
     try {
-      const response = await axios.put(`http://localhost:5000/update_patient/${id}`, {
+      const response = await api.put(`/update_patient/${id}`, {
         name:data.name,
         email:data.email, 
         phone:data.phone, 
@@ -121,7 +122,7 @@ export default function ManagePatient({name,id,patient,age,sex,email,blood_group
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_patient/${id}`);
+      const response = await api.delete(`http://localhost:5000/remove_patient/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Successfully Deleted"))

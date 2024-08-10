@@ -8,6 +8,7 @@ import AddReport from './AddReport';
 import ManageReport from './ManageReport';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import api from '../../api';
 
 
 const OperationReport = () => {
@@ -36,14 +37,11 @@ const OperationReport = () => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const response = await fetch(`http://localhost:5000/reports/${type}`, {
-                method: 'GET',
-                credentials: 'include', // Important for including cookies
-            });
-              if (!response.ok) {
-                  throw new Error('Failed to fetch data');
-              }
-              const fetchedData = await response.json();
+            const response = await api.get(`/reports/${type}`, {
+              withCredentials: true,
+          });
+
+          const fetchedData = response.data;
 
               const columns = [
                 { label: 'ID', field: 'id', sort: 'asc',  },

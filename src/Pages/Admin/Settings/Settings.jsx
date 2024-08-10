@@ -2,6 +2,7 @@ import React from 'react'
 import ManageSettings from './ManageSettings';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import api from '../../../api';
 
 
 const Settings = () => {
@@ -13,14 +14,11 @@ const Settings = () => {
   useEffect(()=>{
     const getsettings = async()=>{
       try {
-        const response = await fetch('http://localhost:5000/settings', {
-          method: 'GET',
-          credentials: 'include', // Important for including cookies
+        const response = await api.get(`/settings`, {
+          withCredentials: true,
       });
-        if(!response.ok){
-          console.log('faild to fetch data..')
-        }
-        const fetchedData = await response.json();
+
+      const fetchedData = response.data;
         setSettings(fetchedData)
       } catch (error) {
         console.log(error)

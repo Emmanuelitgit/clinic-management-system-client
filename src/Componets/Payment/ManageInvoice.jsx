@@ -20,6 +20,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { useLocation } from 'react-router-dom';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -101,7 +102,7 @@ export default function ManageInvoice({name, id, patient_id}) {
 
   const handleUpdate = async() => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_invoice/${id}`, data);
+      const response = await api.put(`/update_invoice/${id}`, data);
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -114,7 +115,7 @@ export default function ManageInvoice({name, id, patient_id}) {
 
   const handleDelete = async() => {
     try {
-      const response = await axios.delete(`http://localhost:5000/remove_invoice/${id}`);
+      const response = await api.delete(`/remove_invoice/${id}`);
       if(response.status === 200){
         handleDepCount()
         dispatch(handleToastSuccess("Deleted Successfully"))

@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { depCountActions } from '../../../store/depCount';
 import { handleToastError, handleToastSuccess } from '../../../store/modalState';
+import api from '../../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -71,7 +72,7 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
     try{
         const formData = new FormData();
         formData.append("file", file)
-        const res = await axios.post("http://localhost:5000/upload", formData)
+        const res = await api.post("/upload", formData)
         return res.data
     }catch(err){
         console.log(err)
@@ -82,7 +83,7 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
     const imgUrl = await upload()
     try {
       const accessToken = localStorage.getItem("token")
-      const response = await axios.put(`http://localhost:5000/update_staff/${id}`, {
+      const response = await api.put(`/update_staff/${id}`, {
         name:data.name,
         role:data.role,
         phone:data.phone,
@@ -112,7 +113,7 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
   const handleDelete = async () => {
     try {
       const accessToken = localStorage.getItem("token")
-      const response = await axios.delete(`http://localhost:5000/remove_staff/${id}`, {
+      const response = await api.delete(`/remove_staff/${id}`, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
