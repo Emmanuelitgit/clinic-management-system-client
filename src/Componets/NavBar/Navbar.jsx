@@ -50,7 +50,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/staff/${role}`);
+        const response = await api.get(`/staff/${role}`);
         const data = response.data;
         setCount(data.length);
       } catch (error) {
