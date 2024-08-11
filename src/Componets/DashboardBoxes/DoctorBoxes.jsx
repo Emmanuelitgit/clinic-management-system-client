@@ -49,7 +49,6 @@ const DoctorBoxes = () => {
        },[dep]);
 
 
-
   const doctorBoxes = [
         {
           id:6,
