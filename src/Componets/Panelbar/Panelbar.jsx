@@ -12,9 +12,13 @@ const Panelbar = () => {
   const dispatch = useDispatch()
   const location = useLocation();
   const route = location.pathname.split("/")[2];
+  const route2 = location.pathname.split("/")[3];
+
   const getAllStaff = useSelector((state)=>state.data?.staff)
   const dep = useSelector(state => state.count?.depValue) || [2];
   const newRoute = route?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const newRoute1 = route?.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
 
   const doctor = getAllStaff.filter((data) => data?.role?.toLowerCase() === "doctor");
   const nurse = getAllStaff.filter((data) => data?.role?.toLowerCase() === "nurse");
@@ -32,7 +36,8 @@ const Panelbar = () => {
     <div className='panel-main-container'>
     <div className='panel-container'>
         <div className='panel-type-container'>
-            <h3 className='panel-type-name'>{newRoute}</h3>
+           {newRoute === "Predict" &&  <h3 className='panel-type-name'>{newRoute1} Interpreter</h3>}
+           {newRoute !== "Predict" &&  <h3 className='panel-type-name'>{newRoute}</h3>}
         </div>
         <div className='panels-container'>
             <div className='panel-name-container'>
