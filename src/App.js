@@ -58,6 +58,9 @@ import ViewMedicine from './Componets/Medicine/ViewMedicine';
 import ViewInvoice from './Componets/Payment/ViewInvoice';
 import ViewRequest from './Componets/Labs/ViewRequest';
 import ViewDepartment from './Pages/Admin/Department/ViewDepartment';
+import Diabetes from './Componets/Prediction/Diabetes';
+import LiverDisease from './Componets/Prediction/LiverDisease';
+import HeartDisease from './Componets/Prediction/HeartDisease';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@coreui/coreui/dist/css/coreui.min.css'
@@ -187,6 +190,9 @@ const router = createBrowserRouter([
       { path: "/doctor/view-appointment/:id", element: <ViewAppointment /> },
       { path: "/doctor/view-allotment/:id", element: <ViewAllotment /> },
       { path: "/doctor/view-blood-bank/:id", element: <ViewBloodBank /> },
+      { path: "/doctor/heart-disease", element: <HeartDisease /> },
+      { path: "/doctor/liver-disease", element: <LiverDisease /> },
+      { path: "/doctor/diabetes", element: <Diabetes /> },
       { path: "/doctor/view-request/:id", element: <ViewRequest /> },
       { path: "/doctor/profile", element: <Profile /> },
       { path: "/doctor/chat", element: <Chat /> },
@@ -251,6 +257,9 @@ const router = createBrowserRouter([
         { path: "/laboratorist/view-result/:id", element: <ViewResult /> },
         { path: "/laboratorist/view-blood-bank/:id", element: <ViewBloodBank /> },
         { path: "/laboratorist/view-donor/:id", element: <ViewDonor /> },
+        { path: "/laboratorist/heart-disease", element: <HeartDisease /> },
+        { path: "/laboratorist/liver-disease", element: <LiverDisease /> },
+        { path: "/laboratorist/diabetes", element: <Diabetes /> }, 
         { path: "/laboratorist/profile", element: <Profile /> },
       ]
     },
