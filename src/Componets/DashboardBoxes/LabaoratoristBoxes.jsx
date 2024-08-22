@@ -59,6 +59,13 @@ const LaboratoristBoxes = () => {
     link:'/laboratorist/blood-donor',
     total: bloodDonors?.length
   },
+  {
+    id:8,
+    name:"Prediction",
+    background:"bg-danger",
+    link:'/doctor/predict/heart-disease',
+    // total: prescriptions?.length
+  },
   ]
 
   return (

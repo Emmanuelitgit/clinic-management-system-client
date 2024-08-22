@@ -103,7 +103,7 @@ const DoctorBoxes = () => {
         id:8,
         name:"Prediction",
         background:"bg-success",
-        link:'/doctor/prescription-list',
+        link:'/doctor/predict/heart-disease',
         // total: prescriptions?.length
       },
       ]
