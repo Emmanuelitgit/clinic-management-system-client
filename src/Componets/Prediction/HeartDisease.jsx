@@ -8,20 +8,20 @@ import Button from 'react-bootstrap/Button';
 
 const HeartDisease = () => {
   const [features, setFeatures] = useState({
-    age:"",
-    sex:"",
-    cp:"",
-    trestbps:"",
-    chol:"",
-    fbs:"",
-    restecg:"",
-    thalach:"",
-    exang:"",
-    oldpeak:"",
-    slope:"",
-    ca:"",
-    thal:"",
-  });
+    Age: "",
+    Sex: "",
+    Cp: "",
+    Trestbps: "",
+    Chol: "",
+    Fbs: "",
+    Restecg: "",
+    Thalach: "",
+    Exang: "",
+    Oldpeak: "",
+    Slope: "",
+    Ca: "",
+    Thal: "",
+});
   const [message, setMessage] = useState('');
   const [show, setShow] = useState(false);
 
