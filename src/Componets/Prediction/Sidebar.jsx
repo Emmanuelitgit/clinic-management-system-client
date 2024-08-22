@@ -14,6 +14,7 @@ const PredictionSidebar = () => {
   return (
     <div className='sidebar-container'>
       <div className='sidebar-items-container'>
+        <br /><br />
         <div className='item'>
           <Link className='link' to={`/${role}/predict/heart-disease`}>
           <Dashboard className='sidebar-icon'/>
