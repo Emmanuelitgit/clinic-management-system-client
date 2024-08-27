@@ -225,12 +225,12 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
           <label htmlFor="">Role</label>
             <select name="role" onChange={handleChange} className='dropdown'>
               <option value="">{data.role}</option>
-              <option value='Doctor'>Doctor</option>
-              <option value="Nurse">Nurse</option>
-              <option value="Pharmacist">Pharmacist</option>
-              <option value="Laboratorist">Laboratorist</option>
-              <option value="Radiographer">Radiographer</option>
-              <option value="Accountant">Accountant</option>
+              <option value='doctor'>Doctor</option>
+              <option value="nurse">Nurse</option>
+              <option value="pharmacist">Pharmacist</option>
+              <option value="laboratorist">Laboratorist</option>
+              <option value="radiographer">Radiographer</option>
+              <option value="accountant">Accountant</option>
             </select>
           </div>
           {name === "Doctor" &&

@@ -31,7 +31,7 @@ export default function AddStaff({name}) {
   axios.defaults.withCredentials = true;
 
   const location = useLocation();
-  const role = location.pathname.split("/")[2].replace("-list", "");
+  const role = location.pathname.split("/")[2].replace("-list", "").toLowerCase();
   const [open, setOpen] = React.useState(false);
   const[file, setFile] = useState(null);
   const [data, setData] = React.useState({

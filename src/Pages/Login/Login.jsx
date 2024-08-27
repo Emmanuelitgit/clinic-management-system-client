@@ -104,13 +104,13 @@ const handleShowPassword = () => {
        <div className="input-field">
        <select name="role" onChange={handleChange} className='login-input'>
           <option value="">--select role--</option>
-          <option value="Admin">Admin</option>
-          <option value="Doctor">Doctor</option>
-          <option value="Nurse">Nurse</option>
-          <option value="Pharmacist">Pharmacist</option>
-          <option value="Accountant">Accountant</option>
-          <option value="Laboratorist">Laboratorist</option>
-          <option value="Radiographer">Radiographer</option>
+          <option value="admin">Admin</option>
+          <option value="doctor">Doctor</option>
+          <option value="nurse">Nurse</option>
+          <option value="pharmacist">Pharmacist</option>
+          <option value="accountant">Accountant</option>
+          <option value="laboratorist">Laboratorist</option>
+          <option value="radiographer">Radiographer</option>
         </select>
        </div>
         <div className="input-field">
