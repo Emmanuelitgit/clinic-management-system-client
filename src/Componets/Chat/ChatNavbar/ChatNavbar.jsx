@@ -18,7 +18,7 @@ const ChatNavbar = ({ receiverId }) => {
     useEffect(() => {
         const getUsers = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/single_staff/${receiverId}`);
+                const response = await axios.get(`http://localhost:26651/single_staff/${receiverId}`);
                 if (!response) {
                     throw new Error("failed to fetch");
                 }

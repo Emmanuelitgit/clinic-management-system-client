@@ -3,7 +3,7 @@ import "./Messages.css";
 import { useState, useEffect, useRef } from "react";
 import { format, parseISO, isValid } from 'date-fns';
 
-const Messages = ({ messages }) => {
+const Messages = ({ messages, receivedMessage }) => {
   
   const userId = localStorage.getItem("userId");
   const messagesEndRef = useRef(null);
@@ -31,21 +31,21 @@ const Messages = ({ messages }) => {
 
   return (
     <div className='messages-container'>
-      {messages.map((msg, index) => {
-        const formattedTime = formatTime(msg.created_at);
+      {messages?.map((msg, index) => {
+        const formattedTime = formatTime(msg?.created_at);
         return (
           <div 
             key={index} 
-            className={`message ${msg.sender === userId ? 'message-sender' : 'message-receiver'}`}
+            className={`message ${parseInt(msg?.sender) === parseInt(userId )? 'message-sender' : 'message-receiver'}`}
           >
             <p>
               {msg.message} 
-              <p className='time-value'>{formattedTime}</p>
+              <p className='time-value'>{msg?.created_at? formattedTime: msg?.createdAt}</p>
             </p>
            
           </div>
         );
-      })}
+      }) }
       <div ref={messagesEndRef} />
     </div>
   );

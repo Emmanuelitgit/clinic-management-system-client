@@ -39,7 +39,7 @@ html{
 .user-container-items{
     display: flex;
     align-items: center;
-    margin-top: 5%;
+    margin-top: 10%;
     cursor: pointer;
     width: 130%;
 }
@@ -48,6 +48,16 @@ html{
     border-radius: 10px;
     width: 130%;
     color: white;
+}
+.user-info-container{
+    display: flex;
+    flex-direction: column;
+}
+.online-status:hover{
+    color:white;
+}
+.user-image-container{
+    position: relative;
 }
 .user-img{
     clip-path: circle();

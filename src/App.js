@@ -224,6 +224,9 @@ const router = createBrowserRouter([
       { path: "/nurse/view-vital/:id", element: <ViewVital /> },
       { path: "/nurse/view-bed/:id", element: <ViewBed /> },
       { path: "/nurse/view-donor/:id", element: <ViewDonor /> },
+      { path: "/nurse/predict/heart-disease", element: <HeartDisease /> },
+      { path: "/nurse/predict/liver-disease", element: <LiverDisease /> },
+      { path: "/nurse/predict/diabetes", element: <Diabetes /> },
       { path: "/nurse/profile", element: <Profile /> },
     ]
   },
@@ -292,6 +295,7 @@ const router = createBrowserRouter([
 
   {path: "/register",element: <Register/>},
   {path: "/login",element: <Login/>},
+  { path: "/chat", element: <Chat /> },
   {
     path: "/*",
     element: <Navigate to="/login" replace />
