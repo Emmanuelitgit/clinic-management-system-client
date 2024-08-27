@@ -40,6 +40,7 @@ const Login = () => {
   const handleLogin = async () => {
     setLoading(true)
     try {
+      console.log(credential)
       const response = await api.post("/login", credential, {
         withCredentials: true,
       });
