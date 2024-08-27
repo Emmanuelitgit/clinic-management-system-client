@@ -5,6 +5,7 @@ import { Logout } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import api from '../../../api';
 
 const ChatNavbar = ({ receiverId }) => {
 
@@ -18,7 +19,7 @@ const ChatNavbar = ({ receiverId }) => {
     useEffect(() => {
         const getUsers = async () => {
             try {
-                const response = await axios.get(`http://localhost:26651/single_staff/${receiverId}`);
+                const response = await api.get(`/single_staff/${receiverId}`);
                 if (!response) {
                     throw new Error("failed to fetch");
                 }
