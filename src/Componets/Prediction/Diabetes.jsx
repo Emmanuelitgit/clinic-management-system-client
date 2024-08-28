@@ -58,13 +58,13 @@ const Diabetes = () => {
   return (
     <div className='prediction-container'>
       <PredictionSidebar />
-      <div className="prediction-forms">
+      <div className={show? "prediction-form" : "prediction-forms"}>
       {show && 
         <Alert variant="danger" 
          onClose={() => setShow(false)} 
          dismissible 
          style={{
-          width:"50%", 
+          width:"70%", 
           marginTop:"5%",
         }
          }>

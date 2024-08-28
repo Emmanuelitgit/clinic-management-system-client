@@ -58,6 +58,12 @@ html{
     left: 25%;
 }
 
+.prediction-form{
+    position: absolute;
+    top: 10%;
+    left: 25%;
+}
+
 .sidebar-container::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Edge */
 }
