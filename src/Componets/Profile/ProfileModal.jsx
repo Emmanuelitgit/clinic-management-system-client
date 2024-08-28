@@ -32,20 +32,25 @@ function ProfileModal() {
     navigate("/login")
   }
 
-  console.log(profile)
   
   return (
     <>
-        {profile !=='null' &&  <img 
+        {/* {profile !=='' &&  <img 
             className='nav-profile-img'
             src={require(`../../uploads/${profile}`)}
             onClick={handleShow} 
-            />}
-            {profile ==='null' &&  <img 
+            />} */}
+            {(profile ==='null' || profile ==='' || profile ===null)? <img 
             className='nav-profile-img'
             src={require(`../../uploads/default.png`)}
             onClick={handleShow} 
-            />}
+            />:
+            <img 
+            className='nav-profile-img'
+            src={require(`../../uploads/${profile}`)}
+            onClick={handleShow} 
+            />
+            }
             <span className='user-name' style={{color:"white"}}>{user}</span>
             <ArrowDropDown 
              className='dropdown-icon'
@@ -62,16 +67,22 @@ function ProfileModal() {
         }}
         >
         <Modal.Header closeButton>
-        {profile ==='null' &&  <img 
+        {/* {profile ==='null' &&  <img 
             className='nav-profile-img'
             src={require(`../../uploads/default.png`)}
             onClick={handleShow} 
-            />}
-           {profile !=='null' &&  <img 
+            />} */}
+           {(profile ==='null' || profile ==='' || profile ===null)?  <img 
+            className='nav-profile-img'
+            src={require(`../../uploads/default.png`)}
+            onClick={handleShow} 
+            />: 
+            <img 
             className='nav-profile-img'
             src={require(`../../uploads/${profile}`)}
             onClick={handleShow} 
-            />}
+            />
+            }
         </Modal.Header>
         <Modal.Body style={{display:'flex', flexDirection:"column", gap:"10px"}}>
             <Link to={`/${route}/profile`} 
