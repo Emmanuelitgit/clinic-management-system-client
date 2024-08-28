@@ -120,8 +120,8 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
   const handleDelete = async () => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger"
+        confirmButton: "confirmBtn",
+        cancelButton: "cancelBtn"
       },
       buttonsStyling: false
     });
@@ -134,10 +134,6 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
       confirmButtonText: "Yes, delete it!",
       cancelButtonText: "No, cancel!",
       reverseButtons: true,
-      customClass:{
-        confirmButton: "confirmBtn",
-        cancelButton:"cancelBtn"
-      }
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {

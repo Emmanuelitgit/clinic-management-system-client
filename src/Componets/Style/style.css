@@ -503,11 +503,17 @@ html{
 .cancelBtn{
   padding: 13px;
   border: none;
+  background-color: brown;
+  border-radius: 15px;
+  width: 20%;
 }
 
 .confirmBtn{
   padding: 13px;
   border: none;
+  background-color: var(--green);
+  border-radius: 15px;
+  width: 20%;
 }
 @media (min-width: 600px) and (max-width: 1000px) {
   .admin-container{
