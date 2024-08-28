@@ -134,7 +134,7 @@ function Chat() {
                (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
       }): 'No messages found';
 
-      const filteredMessage = receivedMessage? receivedMessage.filter((msg) => {
+      const filteredMessage = receivedMessage? receivedMessage?.filter((msg) => {
         return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
                (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
       }): '';
