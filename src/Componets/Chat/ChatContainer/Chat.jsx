@@ -95,7 +95,6 @@ function Chat() {
         }
       };
 
-      console.log
 
     // Send Message to socket server
     useEffect(() => {
