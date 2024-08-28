@@ -58,7 +58,8 @@ function Chat() {
 
     // Connect to Socket.io
     useEffect(() => {
-        socket.current = io("https://clinic-server-o79p.onrender.com:8800");
+        // socket.current = io("ws://https://clinic-server-o79p.onrender.com:8800");
+        socket.current = io("wss://clinic-server-o79p.onrender.com");
         socket.current.emit("new-user-add", userId);
         socket.current.on("get-users", (users) => {
             setOnlineUsers(users);
