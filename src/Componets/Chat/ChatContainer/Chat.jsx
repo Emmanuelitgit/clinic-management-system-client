@@ -106,7 +106,7 @@ function Chat() {
 
     useEffect(() => {
         socket.current.on("recieve-message", (data) => {
-          setReceivedMessage((prevMessages) => [...prevMessages, data]);
+          setReceivedMessage(data);
             scrollToBottom();
         });
       }, [receiverId, userId]);
