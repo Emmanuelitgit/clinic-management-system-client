@@ -24,7 +24,7 @@ function ProfileModal() {
   const handleShow = () => setShow(true);
 
   const location = useLocation();
-  const route = location.pathname.split("/")[1]
+  const route = location?.pathname?.split("/")[1]
 
    const handleLogout = () =>{
     dispatch(logout());

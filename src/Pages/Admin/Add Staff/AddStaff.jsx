@@ -92,7 +92,7 @@ export default function AddStaff({name}) {
           email:data.email,
           password:data.password,
           department:data.department,
-          profile:file? imgUrl : ""
+          profile:file? imgUrl : null
         },
         {
           headers: {
