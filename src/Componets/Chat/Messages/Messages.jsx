@@ -3,7 +3,7 @@ import "./Messages.css";
 import { useState, useEffect, useRef } from "react";
 import { format, parseISO, isValid } from 'date-fns';
 
-const Messages = ({ messages, receivedMessage }) => {
+const Messages = ({ messages }) => {
   
   const userId = localStorage.getItem("userId");
   const messagesEndRef = useRef(null);

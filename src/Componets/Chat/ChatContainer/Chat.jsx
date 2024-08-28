@@ -146,7 +146,7 @@ function Chat() {
       return online ? true : false;
     };
 
-    console.log(filteredMessages)
+    // console.log(filteredMessages)
 
     return (
         <div className='chat-container'>
