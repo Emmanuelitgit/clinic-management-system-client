@@ -32,6 +32,7 @@ function ProfileModal() {
     navigate("/login")
   }
 
+  console.log(profile)
   
   return (
     <>
