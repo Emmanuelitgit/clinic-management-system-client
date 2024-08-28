@@ -68,7 +68,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
     dispatch(depCountActions.handleCount());
   };
 
-  const hadnleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prev) => {
       return {
@@ -173,6 +173,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
     return null;
   }
 
+
   return (
     <React.Fragment>
       <Button
@@ -207,7 +208,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
               placeholder='eg Emmanuel Yidana'
               value={data.name}
               name='name'
-              onChange={hadnleChange} 
+              onChange={handleChange} 
             />
           </div>
           <div className='input-container'>
@@ -217,7 +218,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
               placeholder='eg eyidana001@gmail.com'
               value={data.email}
               name='email'
-              onChange={hadnleChange} 
+              onChange={handleChange} 
             />
           </div>
           <div className='input-container'>
@@ -227,7 +228,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
               placeholder='eg 0597893082'
               value={data.phone}
               name='phone'
-              onChange={hadnleChange} 
+              onChange={handleChange} 
             />
           </div>
           <div className='input-container'>
@@ -237,7 +238,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
               placeholder='eg University of Ghana'
               value={data.address}
               name='address'
-              onChange={hadnleChange}  
+              onChange={handleChange}  
             />
           </div>
           <div className='input-container'>
@@ -247,7 +248,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
               placeholder='eg 25'
               value={data.age}
               name='age'
-              onChange={hadnleChange}  
+              onChange={handleChange}  
             />
           </div>
           <div className='input-container'>
@@ -257,7 +258,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
                placeholder='eg Male'
                value={data.sex}
                name='sex'
-               onChange={hadnleChange}  
+               onChange={handleChange}  
             />
           </div>
           <div className='input-container'>
@@ -267,7 +268,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
                placeholder='eg AB+'
                value={data.blood_group}
                name='blood_group'
-               onChange={hadnleChange}  
+               onChange={handleChange}  
             />
           </div>
           <div className='input-container'>
@@ -277,7 +278,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
                placeholder='eg 24/03/2000'
                value={data.birth_date}
                name='birth_date'
-               onChange={hadnleChange}  
+               onChange={handleChange}  
             />
           </div>
           <div className='input-container'>
