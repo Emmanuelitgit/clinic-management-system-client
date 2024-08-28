@@ -287,15 +287,6 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
               name="file" id="file" 
               onChange={e=>setFile(e.target.files[0])}
              />
-             {(existingProfile && !file) && 
-              <img 
-               src={require(../../uploads/${existingProfile})}
-               alt="" 
-               style={{
-                width:'15%',
-                height:"15%"
-               }}
-               />}
           </div>
         </DialogContent>
         <DialogActions>
