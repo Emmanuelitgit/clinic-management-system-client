@@ -48,7 +48,7 @@ const Messages = ({ messages }) => {
       }) }
 
 
-     {/* {receivedMessage? receivedMessage?.map((msg, index) => {
+     {receivedMessage? receivedMessage?.map((msg, index) => {
         const formattedTime = formatTime(msg?.created_at);
         return (
           <div 
@@ -62,7 +62,7 @@ const Messages = ({ messages }) => {
            
           </div>
         );
-      }): ''} */}
+      }): ''}
       <div ref={messagesEndRef} />
     </div>
   );

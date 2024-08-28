@@ -58,7 +58,6 @@ function Chat() {
 
     // Connect to Socket.io
     useEffect(() => {
-        // socket.current = io("ws://https://clinic-server-o79p.onrender.com:8800");
         socket.current = io("wss://clinic-server-o79p.onrender.com");
         socket.current.emit("new-user-add", userId);
         socket.current.on("get-users", (users) => {
@@ -96,7 +95,7 @@ function Chat() {
         }
       };
 
-      console.log(onlineUsers)
+      console.log
 
     // Send Message to socket server
     useEffect(() => {
@@ -106,7 +105,7 @@ function Chat() {
 
     useEffect(() => {
         socket.current.on("recieve-message", (data) => {
-          setReceivedMessage(data);
+          setMessages((prevMessages) => [...prevMessages, data]);
             scrollToBottom();
         });
       }, [receiverId, userId]);
@@ -133,20 +132,14 @@ function Chat() {
         return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
                (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
       }): 'No messages found';
-
-      // const filteredMessage = receivedMessage? receivedMessage?.filter((msg) => {
-      //   return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
-      //          (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
-      // }): '';
             
-  console.log(receivedMessage)
+  
     const checkOnlineStatus = (chat) => {
-    //   const chatMember = users.find((member) => member.staff_id !== userId);
       const online = onlineUsers.find((user) => user.userId === chat);
       return online ? true : false;
     };
 
-    // console.log(filteredMessages)
+    console.log(filteredMessages)
 
     return (
         <div className='chat-container'>
@@ -162,7 +155,6 @@ function Chat() {
                     <div className='messages-container'>
                         <Messages 
                          messages={filteredMessages}
-                         receivedMessage={filteredMessage}
                         />
                         <div ref={messagesEndRef} />
                     </div>
