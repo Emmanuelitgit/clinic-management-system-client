@@ -72,7 +72,7 @@ function Chat() {
         return () => {
             socket.current.disconnect();
         };
-    }, [userId]);  // Empty dependency array ensures this runs only once
+    }, [userId]); 
 
     const handleSend = async (e) => {
         e.preventDefault();

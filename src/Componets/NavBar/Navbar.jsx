@@ -39,7 +39,6 @@ const Navbar = () => {
       });
 
       const fetchedData = response.data;
-      console.log(fetchedData)
         setSettings(fetchedData)
       } catch (error) {
         console.log(error)

@@ -46,23 +46,6 @@ const Messages = ({ messages }) => {
           </div>
         );
       }) }
-
-
-     {/* {receivedMessage? receivedMessage?.map((msg, index) => {
-        const formattedTime = formatTime(msg?.created_at);
-        return (
-          <div 
-            key={index} 
-            className={`message ${parseInt(msg?.sender) === parseInt(userId )? 'message-sender' : 'message-receiver'}`}
-          >
-            <p>
-              {msg.message} 
-              <p className='time-value'>{msg?.created_at? formattedTime: msg?.createdAt}</p>
-            </p>
-           
-          </div>
-        );
-      }): ''} */}
       <div ref={messagesEndRef} />
     </div>
   );
