@@ -110,10 +110,18 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
       if (response.status === 201) {
         handleDepCount();
         handleClose();
-        dispatch(handleToastSuccess("Updated Successfully"));
+        Swal.fire({
+          title: "Good job!",
+          text: "Patient record updated successfully!",
+          icon: "success"
+        });
       }
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'));
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
 
@@ -139,11 +147,9 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
           const response = await api.delete(`http://localhost:5000/remove_patient/${id}`);
           if (response.status === 200) {
             handleDepCount();
-            // dispatch(handleToastSuccess("Successfully Deleted"));
             swalWithBootstrapButtons.fire("Deleted!", "Patient has been deleted.", "success");
           }
         } catch (error) {
-          // dispatch(handleToastError('Error! cannot perform operation'));
           swalWithBootstrapButtons.fire("Error!", "Patient could not be deleted.", "error");
         }
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -195,7 +201,102 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          {/* Your input fields go here */}
+        <div className='input-container'>
+            <label htmlFor="">Patient Name</label>
+            <input type="text"
+              className='input'
+              placeholder='eg Emmanuel Yidana'
+              value={data.name}
+              name='name'
+              onChange={hadnleChange} 
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Email</label>
+            <input type="text"
+              className='input'
+              placeholder='eg eyidana001@gmail.com'
+              value={data.email}
+              name='email'
+              onChange={hadnleChange} 
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Phone</label>
+            <input type="number"
+              className='input'
+              placeholder='eg 0597893082'
+              value={data.phone}
+              name='phone'
+              onChange={hadnleChange} 
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Patient Address</label>
+            <input type="text"
+              className='input'
+              placeholder='eg University of Ghana'
+              value={data.address}
+              name='address'
+              onChange={hadnleChange}  
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Age</label>
+            <input type="number"
+              className='input'
+              placeholder='eg 25'
+              value={data.age}
+              name='age'
+              onChange={hadnleChange}  
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Sex</label>
+            <input type="text"
+               className='input'
+               placeholder='eg Male'
+               value={data.sex}
+               name='sex'
+               onChange={hadnleChange}  
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Blood Group</label>
+            <input type="text"
+               className='input'
+               placeholder='eg AB+'
+               value={data.blood_group}
+               name='blood_group'
+               onChange={hadnleChange}  
+            />
+          </div>
+          <div className='input-container'>
+            <label htmlFor="">Birth Date</label>
+            <input type="text"
+               className='input'
+               placeholder='eg 24/03/2000'
+               value={data.birth_date}
+               name='birth_date'
+               onChange={hadnleChange}  
+            />
+          </div>
+          <div className='input-container'>
+              <label htmlFor="" className='label'>Profile Image</label>
+              <input type="file" 
+              name="file" id="file" 
+              onChange={e=>setFile(e.target.files[0])}
+             />
+             {(existingProfile && !file) && 
+              <img 
+               src={require(../../uploads/${existingProfile})}
+               alt="" 
+               style={{
+                width:'15%',
+                height:"15%"
+               }}
+               />}
+          </div>
         </DialogContent>
         <DialogActions>
           <button autoFocus

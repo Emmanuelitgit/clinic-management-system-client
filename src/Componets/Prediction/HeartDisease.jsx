@@ -63,11 +63,22 @@ const HeartDisease = () => {
   return (
     <div className='prediction-container'>
       <PredictionSidebar />
-      <div className="prediction-forms">
-        {/* <h1>Heart Disease Interpreter</h1>
-        <h4 style={{ fontSize: '18px' }}>
-          Kindly fill the following input fields with the appropriate values and hit the submit button.
-        </h4> */}
+      <div className={show? "prediction-form" : "prediction-forms"}>
+      {show && 
+        <Alert variant="danger" 
+         onClose={() => setShow(false)} 
+         dismissible 
+         style={{
+          width:"80%", 
+          marginTop:"5%",
+        }
+         }>
+        <Alert.Heading>Below is your result.Thank you!</Alert.Heading>
+        <p>
+           {message}
+        </p>
+      </Alert>
+        }
         <Form style={{ display: "flex", flexWrap: 'wrap' }}>
           {Object.keys(features).map((feature, index) => (
             <Form.Group key={index} className="mb-3" style={{ width: "30%", margin: "1%" }}>
