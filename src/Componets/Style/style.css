@@ -500,6 +500,15 @@ html{
 
 }
 
+.cancelBtn{
+  padding: 13px;
+  border: none;
+}
+
+.confirmBtn{
+  padding: 13px;
+  border: none;
+}
 @media (min-width: 600px) and (max-width: 1000px) {
   .admin-container{
     width: 100%;

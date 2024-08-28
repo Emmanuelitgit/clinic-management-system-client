@@ -133,7 +133,11 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!",
       cancelButtonText: "No, cancel!",
-      reverseButtons: true
+      reverseButtons: true,
+      customClass:{
+        confirmButton: "confirmBtn",
+        cancelButton:"cancelBtn"
+      }
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -144,7 +148,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
             swalWithBootstrapButtons.fire("Deleted!", "Patient has been deleted.", "success");
           }
         } catch (error) {
-          dispatch(handleToastError('Error! cannot perform operation'));
+          // dispatch(handleToastError('Error! cannot perform operation'));
           swalWithBootstrapButtons.fire("Error!", "Patient could not be deleted.", "error");
         }
       } else if (result.dismiss === Swal.DismissReason.cancel) {
