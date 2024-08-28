@@ -134,12 +134,12 @@ function Chat() {
                (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
       }): 'No messages found';
 
-      const filteredMessage = receivedMessage? receivedMessage?.filter((msg) => {
-        return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
-               (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
-      }): '';
+      // const filteredMessage = receivedMessage? receivedMessage?.filter((msg) => {
+      //   return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
+      //          (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
+      // }): '';
             
-  
+  console.log(receivedMessage)
     const checkOnlineStatus = (chat) => {
     //   const chatMember = users.find((member) => member.staff_id !== userId);
       const online = onlineUsers.find((user) => user.userId === chat);
