@@ -34,6 +34,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
   const navigate = useNavigate();
   const location = useLocation();
   const route = location.pathname.split('/')[1];
+  const existingProfile = profile !== null? profile : ''
 
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
