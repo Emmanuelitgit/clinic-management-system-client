@@ -59,10 +59,21 @@ const Diabetes = () => {
     <div className='prediction-container'>
       <PredictionSidebar />
       <div className="prediction-forms">
-        {/* <h1>Diabetes Interpreter</h1>
-        <h4 style={{ fontSize: '18px' }}>
-          Kindly fill the following input fields with the appropriate values and hit the submit button.
-        </h4> */}
+      {show && 
+        <Alert variant="danger" 
+         onClose={() => setShow(false)} 
+         dismissible 
+         style={{
+          width:"50%", 
+          marginTop:"5%",
+        }
+         }>
+        <Alert.Heading>Below is your result.Thank you!</Alert.Heading>
+        <p>
+           {message}
+        </p>
+      </Alert>
+        }
         <Form style={{ display: "flex", flexWrap: 'wrap' }}>
           {Object.keys(features).map((feature, index) => (
             <Form.Group key={index} className="mb-3" style={{ width: "30%", margin: "1%" }}>
@@ -88,21 +99,6 @@ const Diabetes = () => {
         </Button>
 
         <br />
-        {show && 
-        <Alert variant="danger" 
-         onClose={() => setShow(false)} 
-         dismissible 
-         style={{
-          width:"50%", 
-          marginTop:"5%",
-        }
-         }>
-        <Alert.Heading>Below is your result.Thank you!</Alert.Heading>
-        <p>
-           {message}
-        </p>
-      </Alert>
-        }
       </div>
     </div>
   );
