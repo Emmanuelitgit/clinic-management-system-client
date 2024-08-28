@@ -82,18 +82,20 @@ export default function AddStaff({name}) {
   const handleSubmit = async() => {
     const imgUrl = await upload()
     try {
+      const formData = new FormData()
+      formData.append('name', data.name);
+      formData.append('role', data.role);
+      formData.append('phone', data.phone);
+      formData.append('address', data.address);
+      formData.append('email', data.email);
+      formData.append('password', data.password);
+      formData.append('department', data.department);
+      if(file){
+        formData.append('file', imgUrl);
+      }
       const accessToken = localStorage.getItem("token")
       if(accessToken){
-        const response = await api.post(`/add_staff`, {
-          name:data.name,
-          role:data.role,
-          phone:data.phone,
-          address:data.address,
-          email:data.email,
-          password:data.password,
-          department:data.department,
-          profile:file? imgUrl : null
-        },
+        const response = await api.post(`/add_staff`, formData,
         {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
