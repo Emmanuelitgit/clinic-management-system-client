@@ -1,27 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { io } from "socket.io-client";
+import { format } from 'date-fns';
+import api from "../../../api";
 import "./chat.css";
 import ChatSidebar from "../ChatSidebar/ChatSidebar";
 import ChatNavbar from "../ChatNavbar/ChatNavbar";
 import { Send } from '@mui/icons-material';
-import { depCountActions } from '../../../store/depCount';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Messages from '../Messages/Messages';
-import { io } from "socket.io-client";
-import { format, parseISO, isValid } from 'date-fns';
-import api from "../../../api"
 
 function Chat() {
     axios.defaults.withCredentials = true;
 
-    const user_id = localStorage.getItem("userId");
-    const userId = parseInt(user_id)
+    const userId = parseInt(localStorage.getItem("userId"));
     const dispatch = useDispatch();
     const socket = useRef();
-  
+
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [sendMessage, setSendMessage] = useState(null);
-    const [receivedMessage, setReceivedMessage] = useState(null);
     const [newMessage, setNewMessage] = useState("");
     const [receiverId, setReceiverId] = useState(null);
     const [users, setUsers] = useState("");
@@ -36,7 +33,6 @@ function Chat() {
     const handleDepCount = () => {
         dispatch(depCountActions.handleCount());
     };
-
 
     const handleGetUser = (id) => {
         setReceiverId(id);
@@ -54,19 +50,29 @@ function Chat() {
         };
         getUsers();
     }, [userId]);
-    
 
-    // Connect to Socket.io
+    // Connect to Socket.io only once when the component mounts
     useEffect(() => {
         socket.current = io("wss://clinic-server-o79p.onrender.com");
+
         socket.current.emit("new-user-add", userId);
         socket.current.on("get-users", (users) => {
             setOnlineUsers(users);
         });
-    }, [userId]);       
 
+        // Set up a listener for incoming messages
+        socket.current.on("recieve-message", (data) => {
+            setMessages((prevMessages) => [...prevMessages, data]);
+            scrollToBottom();
+        });
 
-    const handleSend = async(e) => {
+        // Clean up the socket connection when the component unmounts
+        return () => {
+            socket.current.disconnect();
+        };
+    }, [userId]);  // Empty dependency array ensures this runs only once
+
+    const handleSend = async (e) => {
         e.preventDefault();
         try {
             const date = new Date();
@@ -75,75 +81,62 @@ function Chat() {
                 sender: userId,
                 receiver: receiverId,
                 message: newMessage,
-                createdAt:formattedTime
+                createdAt: formattedTime
             };
             setSendMessage(message);
 
-          const response = await api.post(`/add-message`, {
-            sender:message.sender,
-            receiver:message.receiver,
-            message:message.message
-          });
-          if(response.status === 201){
-            setMessages((prevMessages) => [...prevMessages, message]);
-            scrollToBottom();
-          }
+            const response = await api.post(`/add-message`, {
+                sender: message.sender,
+                receiver: message.receiver,
+                message: message.message
+            });
+            if (response.status === 201) {
+                setMessages((prevMessages) => [...prevMessages, message]);
+                scrollToBottom();
+            }
         } catch (error) {
-            console.log(error)
-        }finally{
+            console.log(error);
+        } finally {
             setNewMessage("");
         }
-      };
-
+    };
 
     // Send Message to socket server
     useEffect(() => {
-      if (sendMessage!==null) {
-        socket.current.emit("send-message", sendMessage);}
+        if (sendMessage !== null) {
+            socket.current.emit("send-message", sendMessage);
+        }
     }, [sendMessage]);
 
     useEffect(() => {
-        socket.current.on("recieve-message", (data) => {
-          setMessages((prevMessages) => [...prevMessages, data]);
-            scrollToBottom();
-        });
-      }, [receiverId, userId]);
+        const getMessages = async () => {
+            try {
+                const response = await api.get(`/messages`, {
+                    withCredentials: true,
+                });
 
+                const fetchedData = response.data;
+                setMessages(fetchedData);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getMessages();
+    }, [receiverId, userId]);
 
-      useEffect(()=>{
-        const getMessages = async()=>{
-          try {
-            const response = await api.get(`/messages`, {
-              withCredentials: true,
-          });
-    
-          const fetchedData = response.data;
-            setMessages(fetchedData)
-          } catch (error) {
-            console.log(error)
-          }
-        }
-        getMessages()
-      }, [receiverId, userId])
-  
+    const filteredMessages = messages.filter((msg) => {
+        return (parseInt(msg.sender) === userId && parseInt(msg.receiver) === receiverId) ||
+            (parseInt(msg.receiver) === userId && parseInt(msg.sender) === receiverId);
+    });
 
-      const filteredMessages = messages? messages.filter((msg) => {
-        return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
-               (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
-      }): 'No messages found';
-            
-  
     const checkOnlineStatus = (chat) => {
-      const online = onlineUsers.find((user) => user.userId === chat);
-      return online ? true : false;
+        return onlineUsers.some((user) => user.userId === chat);
     };
-
-    console.log(filteredMessages)
 
     return (
         <div className='chat-container'>
-            <ChatSidebar 
-                users={users} 
+            <ChatSidebar
+                users={users}
                 handleGetUser={handleGetUser}
                 fetchMessages={handleDepCount}
                 status={checkOnlineStatus}
@@ -152,8 +145,8 @@ function Chat() {
                 <ChatNavbar receiverId={receiverId} />
                 <div className='message-input-container'>
                     <div className='messages-container'>
-                        <Messages 
-                         messages={filteredMessages}
+                        <Messages
+                            messages={filteredMessages}
                         />
                         <div ref={messagesEndRef} />
                     </div>
@@ -166,9 +159,9 @@ function Chat() {
                             className='chat-input'
                             disabled={receiverId === null}
                         />
-                        <button 
+                        <button
                             onClick={handleSend} className='chat-btn'
-                            disabled={sendMessage === ""}
+                            disabled={newMessage === ""}
                         >
                             <Send />
                         </button>

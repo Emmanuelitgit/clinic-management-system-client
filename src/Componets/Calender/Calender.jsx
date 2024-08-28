@@ -17,7 +17,7 @@ const Calender = () => {
   };
 
   useEffect(() => {
-    api.get('http://localhost:5000/appointments', { withCredentials: true })
+    api.get('/appointments', { withCredentials: true })
       .then(response => {
         const formattedEvents = response.data?.map(appointment => ({
           title: getText(appointment.description),
@@ -29,6 +29,7 @@ const Calender = () => {
       .catch(error => console.error('Error fetching appointments:', error));
   }, []);
 
+  
   return (
     <div className="calendar-container">
       <Calendar
