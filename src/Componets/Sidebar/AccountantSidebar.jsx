@@ -14,14 +14,15 @@ const AccountantSidebar = () => {
       <div className='sidebar-items-container'>
        <Link to={'/pharmacist/profile'} className='link'>
          <div className='item'>
-           {profile !=='null' &&  <img 
-            className='sidebar-img'
-            src={require(`../../uploads/${profile}`)}
-            />}
-            {profile ==='null' &&  <img 
+         {(profile ==='null' || profile ==='' || profile ===null)?  <img 
             className='sidebar-img'
             src={require(`../../uploads/default.png`)}
-            />}
+            />:
+            <img 
+            className='sidebar-img'
+            src={require(`../../uploads/${profile}`)}
+            />
+          }
         </div>
         </Link>
         <div className='item'>
