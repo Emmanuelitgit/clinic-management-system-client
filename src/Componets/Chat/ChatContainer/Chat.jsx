@@ -58,7 +58,7 @@ function Chat() {
 
     // Connect to Socket.io
     useEffect(() => {
-        socket.current = io("https://clinic-server-o79p.onrender.com:26651");
+        socket.current = io("https://clinic-server-o79p.onrender.com:8800");
         socket.current.emit("new-user-add", userId);
         socket.current.on("get-users", (users) => {
             setOnlineUsers(users);
@@ -84,7 +84,6 @@ function Chat() {
             receiver:message.receiver,
             message:message.message
           });
-          console.log(response)
           if(response.status === 201){
             setMessages((prevMessages) => [...prevMessages, message]);
             scrollToBottom();
@@ -96,6 +95,7 @@ function Chat() {
         }
       };
 
+      console.log(onlineUsers)
 
     // Send Message to socket server
     useEffect(() => {
