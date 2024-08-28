@@ -64,7 +64,7 @@ const Diabetes = () => {
          onClose={() => setShow(false)} 
          dismissible 
          style={{
-          width:"70%", 
+          width:"80%", 
           marginTop:"5%",
         }
          }>
