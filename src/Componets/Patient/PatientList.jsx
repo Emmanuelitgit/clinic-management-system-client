@@ -5,6 +5,9 @@ import AddPatient from './AddPatient';
 import ManagePatient from './ManagePatient';
 import { useDispatch, useSelector } from 'react-redux';
 import api from '../../api';
+import Swal from 'sweetalert2'
+
+
 
 const PatientList = () => {
 
@@ -12,6 +15,13 @@ const PatientList = () => {
   const [data, setData] = useState({ columns: [], rows: [] });
   const dep = useSelector(state => state.count?.depValue) || [2];
 
+  const showAlert = () =>{
+    Swal.fire({
+        title: "Good job!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
+  }
 
   useEffect(() => {
       const fetchData = async () => {
