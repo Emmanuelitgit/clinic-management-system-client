@@ -121,9 +121,8 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success confirmBtn",
-        cancelButton: "btn btn-danger cancelBtn"
+        cancelButton: "btn btn-danger cancelBtn",
       },
-      buttonsStyling: false
     });
 
     swalWithBootstrapButtons.fire({
