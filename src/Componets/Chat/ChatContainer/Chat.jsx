@@ -106,7 +106,7 @@ function Chat() {
 
     useEffect(() => {
         socket.current.on("recieve-message", (data) => {
-          setMessages((prevMessages) => [...prevMessages, data]);
+          setReceivedMessage((prevMessages) => [...prevMessages, data]);
             scrollToBottom();
         });
       }, [receiverId, userId]);
@@ -133,6 +133,11 @@ function Chat() {
         return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
                (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
       }): 'No messages found';
+
+      const filteredMessage = receivedMessage? receivedMessage.filter((msg) => {
+        return (parseInt(msg.sender )=== userId && parseInt(msg.receiver )=== receiverId) || 
+               (parseInt(msg.receiver) === userId && parseInt(msg.sender )=== receiverId);
+      }): '';
             
   
     const checkOnlineStatus = (chat) => {
@@ -157,6 +162,7 @@ function Chat() {
                     <div className='messages-container'>
                         <Messages 
                          messages={filteredMessages}
+                         receivedMessage={filteredMessage}
                         />
                         <div ref={messagesEndRef} />
                     </div>
