@@ -14,6 +14,8 @@ import axios from "axios";
 import { useDispatch} from 'react-redux';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import api from '../../api';
+import Swal from 'sweetalert2';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -91,10 +93,21 @@ export default function AddPatient() {
       if(response.status === 201){
         handleDepCount()
         handleClose()
-        dispatch(handleToastSuccess("Successfully Added"))
-      }
+        Swal.fire({
+          title: "Success!",
+          text: "Patient added successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });       }
     } catch (error) {
-      dispatch(handleToastError("Error! cannot perform operation"))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
       console.log(error)
     }
   };

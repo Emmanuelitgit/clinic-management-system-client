@@ -16,6 +16,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import { toast, Toaster } from 'react-hot-toast';
 import api from '../../api';
+import Swal from 'sweetalert2';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -75,11 +76,22 @@ export default function AddBed() {
       if(response.status === 201){
         handleDepCount()
         handleClose()
-        showAddToast()
+        Swal.fire({
+          title: "Success!",
+          text: "Bed allotment created successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });       
       }
     } catch (error) {
-        showErrorToast()
-    }
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });    }
   };
   return (
     <React.Fragment>

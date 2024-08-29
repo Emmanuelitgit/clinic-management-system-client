@@ -17,6 +17,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import api from '../../api';
+import Swal from 'sweetalert2';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -85,10 +86,22 @@ const handleSubmit = async() => {
     if(response.status === 201){
       handleDepCount()
       handleClose()
-      dispatch(handleToastSuccess("Created Successfully"))
+      Swal.fire({
+        title: "Success!",
+        text: "Appointment added successfully!",
+        icon: "success",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "bg-success",
+        },
+      }); 
     }
   } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
   }
 };
 

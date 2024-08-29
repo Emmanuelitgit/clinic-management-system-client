@@ -157,7 +157,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
           swalWithBootstrapButtons.fire("Error!", "Patient could not be deleted.", "error");
         }
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        swalWithBootstrapButtons.fire("Cancelled", "The patient is safe :)", "error");
+        swalWithBootstrapButtons.fire("Cancelled", "The patient is safe", "error");
       }
     });
   };
