@@ -114,7 +114,10 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
           title: "Success!",
           text: "Patient record updated successfully!",
           icon: "success",
-          confirmButtonText: "OK"
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
         });        
       }
     } catch (error) {
