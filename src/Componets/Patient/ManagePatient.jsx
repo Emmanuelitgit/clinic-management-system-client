@@ -113,8 +113,9 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
         Swal.fire({
           title: "Success!",
           text: "Patient record updated successfully!",
-          icon: "success"
-        });
+          icon: "success",
+          confirmButtonText: "OK"
+        });        
       }
     } catch (error) {
       Swal.fire({
