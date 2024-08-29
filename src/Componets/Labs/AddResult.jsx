@@ -18,6 +18,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import api from '../../api';
+import Swal from 'sweetalert2';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -91,11 +92,27 @@ export default function AddResult() {
         handleOpen();
         dispatch(handleToastSuccess("Created Successfully"))
       } else {
-        dispatch(handleToastError('Error! cannot perform operation'))
+        Swal.fire({
+          title: "Success!",
+          text: "Lab result added successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });       
       }
       console.log(response);
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });    
     }
   };
 

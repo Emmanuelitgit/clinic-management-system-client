@@ -129,7 +129,12 @@ export default function ManageAppointment({name,id,patient_id,doctor_id,patient_
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
-      });    }
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });    
+    }
   };
 
   const handleDelete = async () => {

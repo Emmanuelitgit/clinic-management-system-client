@@ -101,6 +101,10 @@ const handleSubmit = async() => {
       icon: "error",
       title: "Oops...",
       text: "Something went wrong!",
+      confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
     });
   }
 };

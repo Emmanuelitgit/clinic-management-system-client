@@ -19,6 +19,7 @@ import { getStaff, getPatients } from '../../store/data';
 import { useLocation } from 'react-router-dom';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import api from '../../api';
+import Swal from 'sweetalert2';
 
 
 
@@ -101,23 +102,60 @@ export default function ManageVital({name, id, patient_id}) {
       if(response.status === 201){
         handleDepCount()
         handleClose()
-        dispatch(handleToastSuccess("Updated Successfully"))
+        Swal.fire({
+          title: "Success!",
+          text: "Patient vital updated successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });      
       }
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });    
     }
   };
 
-  const handleDelete = async() => {
-    try {
-      const response = await api.delete(`/remove_vital/${id}`);
-      if(response.status === 200){
-        handleDepCount()
-        dispatch(handleToastSuccess("Deleted Successfully"))
+  const handleDelete = async () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "bg-success",
+        cancelButton: "bg-danger",
+      },
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await api.delete(`/remove_vital/${id}`);
+          if (response.status === 200) {
+            handleDepCount();
+            swalWithBootstrapButtons.fire("Deleted!", "Patient vital deleted successfully.", "success");
+          }
+        } catch (error) {
+          swalWithBootstrapButtons.fire("Error!", "Patient vital could not be deleted.", "error");
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire("Cancelled", "Operation cancelled", "error");
       }
-    } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
-    }
+    });
   };
 
 

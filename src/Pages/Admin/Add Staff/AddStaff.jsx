@@ -15,6 +15,7 @@ import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { handleToastError, handleToastSuccess } from '../../../store/modalState';
 import api from '../../../api';
+import Swal from 'sweetalert2';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -106,14 +107,29 @@ export default function AddStaff({name}) {
         if(response.status === 201){
           handleDepCount()
           handleClose()
-          dispatch(handleToastSuccess("Successfully Added"))
-        }
+          Swal.fire({
+            title: "Success!",
+            text: "Staff added successfully!",
+            icon: "success",
+            confirmButtonText: "OK",
+            customClass: {
+              confirmButton: "bg-success",
+            },
+          });         }
         if(response.status === 401){
           dispatch(handleToastError('Acess denied'))
         }
       }
     } catch (error) {
-      dispatch(handleToastError("Error! cannot perform operation"))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "bg-success",
+        },
+      });    
     }
   };
 

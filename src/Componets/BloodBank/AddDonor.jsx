@@ -15,6 +15,7 @@ import axios from "axios";
 import { getBloodGroup } from '../../store/data';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import api from '../../api';
+import Swal from 'sweetalert2';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -77,10 +78,25 @@ export default function AddDonor() {
       if(response.status === 201){
         handleDepCount()
         handleClose()
-        dispatch(handleToastSuccess("Created Successfully"))
-      }
+        Swal.fire({
+          title: "Success!",
+          text: "Blood donor created successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });      }
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });
     }
   };
 

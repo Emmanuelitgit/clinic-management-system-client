@@ -18,6 +18,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
 import api from '../../api';
+import Swal from 'sweetalert2';
 
 
 
@@ -139,14 +140,28 @@ useEffect(() => {
       if(response.status === 201){
         handleDepCount()
         handleClose()
-        dispatch(handleToastSuccess("Created Successfully"))
-        const { authorization_url } = response.data.data;
+        Swal.fire({
+          title: "Success!",
+          text: "Invoice created successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });          const { authorization_url } = response.data.data;
         const { reference } = response.data.data;
         window.location.href = authorization_url;
       }
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
-    }
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "bg-success",
+        },
+      });    }
   };
 
   return (

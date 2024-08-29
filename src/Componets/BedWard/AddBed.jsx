@@ -91,7 +91,12 @@ export default function AddBed() {
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
-      });    }
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });    
+    }
   };
   return (
     <React.Fragment>

@@ -71,6 +71,11 @@ const BloodBank = () => {
                   <AddBloodBank/>
               </div>
           }
+           {role === "doctor"  &&
+              <div className='add-btn-container'>
+                  <AddBloodBank/>
+              </div>
+          }
           {role === "laboratorist"  &&
               <div className='add-btn-container'>
                   <AddBloodBank/>

@@ -16,6 +16,7 @@ import { depCountActions } from '../../../store/depCount';
 import axios from "axios";
 import {handleToastSuccess, handleToastError} from "../../../store/modalState"
 import api from '../../../api';
+import Swal from 'sweetalert2';
 
 
 
@@ -75,10 +76,25 @@ export default function ManageSettings({name,email,phone,language,currency,addre
       if(response.status === 201){
         handleDepCount()
         handleClose()
-        dispatch(handleToastSuccess("Updated Successfully"))
-      }
+        Swal.fire({
+          title: "Success!",
+          text: "Settings updated successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });      }
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });     
     }
   };
 

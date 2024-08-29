@@ -125,6 +125,10 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
       });
     }
   };

@@ -14,6 +14,8 @@ import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { handleToastError, handleToastSuccess } from '../../store/modalState';
 import api from '../../api';
+import Swal from 'sweetalert2';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -81,11 +83,25 @@ export default function ManageProfile({ name,backgroundColor,padding,color,width
       if (response.status === 201) {
         handleDepCount();
         handleClose();
-        dispatch(handleToastSuccess("Successfully Updated"));
-      }
+        Swal.fire({
+          title: "Success!",
+          text: "Profile updated successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });        }
     } catch (error) {
-      dispatch(handleToastError("Error! Cannot perform operation"));
-    }
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });      }
   };
 
   useEffect(() => {

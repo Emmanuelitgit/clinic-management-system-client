@@ -13,6 +13,7 @@ import axios from 'axios';
 import { depCountActions } from '../../../store/depCount';
 import { handleToastError, handleToastSuccess } from '../../../store/modalState';
 import api from '../../../api';
+import Swal from 'sweetalert2';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -103,30 +104,67 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
       if (response.status === 201) {
         handleDepCount();
         handleClose();
-        dispatch(handleToastSuccess("Successfully Updated"))
+        Swal.fire({
+          title: "Success!",
+          text: "Staff record updated successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });       
       }
     } catch (error) {
-      dispatch(handleToastError("Error! cannot perform operation"))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+      });    
     }
   };
 
   const handleDelete = async () => {
-    try {
-      const accessToken = localStorage.getItem("token")
-      const response = await api.delete(`/remove_staff/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "bg-success",
+        cancelButton: "bg-danger",
+      },
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await api.delete(`/remove_staff/${id}`, {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json'
+          }
+          });          
+          if (response.status === 200) {
+            handleDepCount();
+            swalWithBootstrapButtons.fire("Deleted!", "Staff record deleted successfully.", "success");
+          }
+        } catch (error) {
+          swalWithBootstrapButtons.fire("Error!", "Staff record could not be deleted.", "error");
+        }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire("Cancelled", "Operation cancelled", "error");
       }
-      });
-      if (response.status === 200) {
-        handleDepCount();
-        dispatch(handleToastSuccess("Successfully Deleted"))
-      }
-    } catch (error) {
-      dispatch(handleToastError("Error! cannot perform operation"))
-    }
+    });
   };
+
 
   const handleNavigate = () => {
     navigate(`/admin/view-staff/${id}`);

@@ -101,12 +101,17 @@ export default function AddPatient() {
           customClass: {
             confirmButton: "bg-success",
           },
-        });       }
+        });       
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong!",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "bg-success",
+        },
       });
       console.log(error)
     }
