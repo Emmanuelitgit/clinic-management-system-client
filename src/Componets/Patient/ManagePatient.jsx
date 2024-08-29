@@ -111,7 +111,7 @@ export default function ManagePatient({ name, id, patient, age, sex, email, bloo
         handleDepCount();
         handleClose();
         Swal.fire({
-          title: "Good job!",
+          title: "Success!",
           text: "Patient record updated successfully!",
           icon: "success"
         });
