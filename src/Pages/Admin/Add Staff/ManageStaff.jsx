@@ -148,7 +148,6 @@ export default function ManageStaff({ name,id,profile,role,phone,address,email,p
         try {
           const response = await api.delete(`/remove_staff/${id}`, {
             headers: {
-              'Authorization': `Bearer ${accessToken}`,
               'Content-Type': 'application/json'
           }
           });          
