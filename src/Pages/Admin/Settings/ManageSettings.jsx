@@ -84,7 +84,8 @@ export default function ManageSettings({name,email,phone,language,currency,addre
           customClass: {
             confirmButton: "bg-success",
           },
-        });      }
+        });      
+      }
     } catch (error) {
       Swal.fire({
         icon: "error",

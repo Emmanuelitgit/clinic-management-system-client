@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import doctor from "../../Componets/images/staff/doctor 1.png";
 import { useLocation } from 'react-router-dom';
 import api from '../../api';
+import { saveAs } from 'file-saver';
 
 
 const ViewInvoice = () => {
@@ -21,6 +22,7 @@ const ViewInvoice = () => {
         }
     }
 
+
     useEffect(()=>{
         const getStaff = async()=>{
             try {
@@ -35,7 +37,17 @@ const ViewInvoice = () => {
             }
         }
         getStaff()
-    }, [])
+    }, []);
+
+  handleDownlaodPDF = () => {
+      api.post('/create-invoice-pdf', data)
+        .then(() => api.get('fetch-invoice-pdf', { responseType: 'blob' }))
+        .then((res) => {
+          const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+  
+          saveAs(pdfBlob, 'newPdf.pdf');
+        })
+    }
 
   return (
     <div className='view-result-container'>
@@ -50,6 +62,7 @@ const ViewInvoice = () => {
                         <th className='view-patient-th '>Status</th>
                         <th className='view-patient-th '>Accountant</th>
                         <th className='view-patient-th '>Date</th>
+                        <th className='view-patient-th '>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -61,6 +74,7 @@ const ViewInvoice = () => {
                        <td className='medical-history-td-tr'>{invoice.status}</td>
                        <td className='medical-history-td-tr'>{invoice.accountant_name}</td>
                        <td className='medical-history-td-tr'>{invoice.date}</td>
+                       <td className='medical-history-td-tr'><button onClick={handleDownlaodPDF}>Print</button></td>
                    </tr>
                     ))}
                   </tbody>
