@@ -39,7 +39,7 @@ const ViewInvoice = () => {
         getStaff()
     }, []);
 
-  handleDownlaodPDF = () => {
+  const handleDownloadPDF = () => {
       api.post('/create-invoice-pdf', data)
         .then(() => api.get('fetch-invoice-pdf', { responseType: 'blob' }))
         .then((res) => {
@@ -74,7 +74,7 @@ const ViewInvoice = () => {
                        <td className='medical-history-td-tr'>{invoice.status}</td>
                        <td className='medical-history-td-tr'>{invoice.accountant_name}</td>
                        <td className='medical-history-td-tr'>{invoice.date}</td>
-                       <td className='medical-history-td-tr'><button onClick={handleDownlaodPDF}>Print</button></td>
+                       <td className='medical-history-td-tr'><button onClick={handleDownloadPDF}>Print</button></td>
                    </tr>
                     ))}
                   </tbody>
