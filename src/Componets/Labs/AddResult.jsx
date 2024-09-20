@@ -90,8 +90,6 @@ export default function AddResult() {
       if (response.status === 201) {
         handleDepCount();
         handleOpen();
-        dispatch(handleToastSuccess("Created Successfully"))
-      } else {
         Swal.fire({
           title: "Success!",
           text: "Lab result added successfully!",
@@ -100,9 +98,8 @@ export default function AddResult() {
           customClass: {
             confirmButton: "bg-success",
           },
-        });       
-      }
-      console.log(response);
+        });      
+      } 
     } catch (error) {
       Swal.fire({
         icon: "error",

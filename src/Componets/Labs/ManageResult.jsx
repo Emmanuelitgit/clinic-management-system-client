@@ -35,7 +35,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function ManageResult({name, id, date, laboratorist_name, test_report, patient_id}) {
+export default function ManageResult({name, id, date, test_report, patient_id, laboratorist_id}) {
 
   axios.defaults.withCredentials = true;
 
@@ -52,32 +52,25 @@ export default function ManageResult({name, id, date, laboratorist_name, test_re
   const [data, setData] = useState({
     date:'',
     laboratorist_id:null,
-    patient_id:result_id,
+    patient_id:null,
     test_report:report
   });
 
-  useEffect(()=>{
-    setData(prev => ({
-      ...prev,
-      patient_id: result_id
-    }));
-  }, [result_id]);
-  
   
     useEffect(()=>{
       dispatch(getStaff('Laboratorist'))
     }, [dispatch])
 
     useEffect(() => {
-      setData((prevData) => ({ ...prevData, report }));
+      setData((prevData) => ({ ...prevData, test_report:report }));
     }, [report]);
 
   const handleClickOpen = () => {
     setOpen(true);
     setData({
       date,
-      laboratorist_id: laboratorist_name,
-      patient_id: result_id,
+      laboratorist_id: laboratorist_id,
+      patient_id: patient_id,
       test_report:test_report
     });
   };
@@ -85,7 +78,6 @@ export default function ManageResult({name, id, date, laboratorist_name, test_re
   const handleNavigate = () =>{
     navigate(`/${route}/view-result/${patient_id}`)
   }
-  console.log(patient_id)
 
   const handleClose = () => {
     setOpen(false);

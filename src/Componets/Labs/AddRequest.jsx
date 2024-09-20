@@ -171,6 +171,7 @@ export default function AddRequest() {
               <option value="Stool Sample">Stool Sample</option>
               <option value="Saliva Swab">Saliva Swab</option>
               <option value="Hair Sample">Hair Sample</option>
+              <option value="Imaging Scan">Imaging Scan</option>
             </select>
         </div>
         <div className='input-container'>
@@ -181,7 +182,7 @@ export default function AddRequest() {
               <option value="Hepatitis B">Hepatitis B</option>
               <option value="Hepatitis A">Hepatitis A</option>
               <option value="Liver Function Test (LFT)">Liver Function Test (LFT)</option>
-              <option value="Pregnancy Tes">Pregnancy Tes</option>
+              <option value="Pregnancy Test">Pregnancy Test</option>
               <option value="Ultrasound (US)">Ultrasound (US)</option>
               <option value="X-Ray">X-Ray</option>
             </select>

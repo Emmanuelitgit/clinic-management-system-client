@@ -148,7 +148,9 @@ useEffect(() => {
           customClass: {
             confirmButton: "bg-success",
           },
-        });          const { authorization_url } = response.data.data;
+        });
+        
+        const { authorization_url } = response.data.data;
         const { reference } = response.data.data;
         window.location.href = authorization_url;
       }
@@ -161,7 +163,8 @@ useEffect(() => {
         customClass: {
           confirmButton: "bg-success",
         },
-      });    }
+      });    
+    }
   };
 
   return (

@@ -3,6 +3,7 @@ import doctor from "../../Componets/images/staff/doctor 1.png";
 import { useLocation } from 'react-router-dom';
 import api from '../../api';
 import { saveAs } from 'file-saver';
+import PrintIcon from '@mui/icons-material/Print';
 
 
 const ViewInvoice = () => {
@@ -22,6 +23,10 @@ const ViewInvoice = () => {
         }
     }
 
+    const getText = (html) =>{
+      const doc = new DOMParser().parseFromString(html, "text/html")
+      return doc.body.textContent
+   }
 
     useEffect(()=>{
         const getStaff = async()=>{
@@ -40,12 +45,13 @@ const ViewInvoice = () => {
     }, []);
 
   const handleDownloadPDF = () => {
+    console.log(data)
       api.post('/create-invoice-pdf', data)
         .then(() => api.get('fetch-invoice-pdf', { responseType: 'blob' }))
         .then((res) => {
           const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
   
-          saveAs(pdfBlob, 'newPdf.pdf');
+          saveAs(pdfBlob, 'invoice.pdf');
         })
     }
 
@@ -68,13 +74,23 @@ const ViewInvoice = () => {
                   <tbody>
                     {data?.map((invoice)=>(
                     <tr className='medical-history-td-tr view-patient-tr' key={invoice.invoice_id}>
-                       <td className='medical-history-td-tr'>{invoice.description}</td>
+                       <td className='medical-history-td-tr'>{getText(invoice.description)}</td>
                        <td className='medical-history-td-tr'>{invoice.title}</td>
                        <td className='medical-history-td-tr'>{invoice.amount}</td>
                        <td className='medical-history-td-tr'>{invoice.status}</td>
                        <td className='medical-history-td-tr'>{invoice.accountant_name}</td>
                        <td className='medical-history-td-tr'>{invoice.date}</td>
-                       <td className='medical-history-td-tr'><button onClick={handleDownloadPDF}>Print</button></td>
+                       <td className='medical-history-td-tr'>
+                       <button onClick={handleDownloadPDF} style={{
+                        backgroundColor:"navy",
+                        padding:"4px",
+                        border:"none",
+                        width:"70%",
+                        color:"white",
+                       }}>
+                         <PrintIcon/>
+                       </button>
+                       </td>
                    </tr>
                     ))}
                   </tbody>

@@ -55,9 +55,9 @@ html{
     font-weight: 530;
 }
 .logo{
-    width: 17%;
-    height: 248%;
-    border-radius: 50%;
+    width: 12%;
+    height: 180%;
+    border-radius: 10%;
     position: absolute;
     right: 105%;
 }

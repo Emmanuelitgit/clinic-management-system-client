@@ -11,6 +11,8 @@ import axios from 'axios';
 import { depCountActions } from '../../store/depCount';
 import { ArrowDropDown } from '@mui/icons-material';
 import {handleToastSuccess, handleToastError} from "../../store/modalState"
+import Swal from 'sweetalert2';
+import api from '../../api';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -47,14 +49,30 @@ export default function StatusDropdown({ statusValue, name, id, option1, option2
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.put(`http://localhost:5000/update_${url}_status/${id}`, { status: data.status });
+      const response = await api.put(`/update_${url}_status/${id}`, { status: data.status });
       if (response.status === 201) { 
         handleDepCount();
         handleClose();
-        dispatch(handleToastSuccess("Updated Successfully"))
+        Swal.fire({
+          title: "Success!",
+          text: `${name} status updated successfully!`,
+          icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: "bg-success",
+          },
+        });      
       }
     } catch (error) {
-      dispatch(handleToastError('Error! cannot perform operation'))
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        confirmButtonText: "OK",
+        customClass: {
+          confirmButton: "bg-success",
+        },
+      });
     }
   };
 

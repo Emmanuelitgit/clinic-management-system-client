@@ -11,6 +11,11 @@ const ViewMedicine = () => {
     const id = location.pathname.split("/")[3];
     let medicine_name = data?.map((d)=>d?.name)
 
+    const getText = (html) =>{
+      const doc = new DOMParser().parseFromString(html, "text/html")
+      return doc.body.textContent
+   }
+
 
     useEffect(()=>{
         const getStaff = async()=>{
@@ -45,7 +50,7 @@ const ViewMedicine = () => {
                    <tbody>
                      {data?.map((medicine)=>(
                      <tr className='medical-history-td-tr view-patient-tr' key={medicine.medicine_id}>
-                       <td className='medical-history-td-tr'>{medicine.description}</td>
+                       <td className='medical-history-td-tr'>{getText(medicine.description)}</td>
                        <td className='medical-history-td-tr'>{medicine.category}</td>
                        <td className='medical-history-td-tr'>{medicine.price}</td>
                        <td className='medical-history-td-tr'>{medicine.manufacturer}</td>

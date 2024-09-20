@@ -74,6 +74,7 @@ const ResultList = () => {
                  laboratorist_name={item.laboratorist_name}
                  test_report={item.test_report}
                  patient_id={item.patient_id}
+                 laboratorist_id={item.laboratorist_id}
                 />
                 </>
               ),

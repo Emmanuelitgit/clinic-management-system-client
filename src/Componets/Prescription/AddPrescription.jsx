@@ -39,6 +39,8 @@ export default function AddPrescription() {
     patient_id:null,
     doctor_id:null,
     medication:'',
+    dosage:'',
+    duration:'',
     description:description,
     date:''
   });
@@ -95,6 +97,7 @@ export default function AddPrescription() {
           },
         });      }
     } catch (error) {
+      handleClose()
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -160,8 +163,26 @@ export default function AddPrescription() {
             <label htmlFor="">Medication</label>
             <input type="text"
               className='input'
-              placeholder='eg Mohammed Yidana'
+              placeholder='eg Paracetamol'
               name='medication'
+              onChange={handleChange} 
+            />
+        </div>
+        <div className='input-container'>
+            <label htmlFor="">Dosage</label>
+            <input type="text"
+              className='input'
+              placeholder='eg 1 TAB'
+              name='dosage'
+              onChange={handleChange} 
+            />
+        </div>
+        <div className='input-container'>
+            <label htmlFor="">Duration</label>
+            <input type="text"
+              className='input'
+              placeholder='eg 2 Months'
+              name='duration'
               onChange={handleChange} 
             />
         </div>
@@ -174,11 +195,11 @@ export default function AddPrescription() {
             />
         </div>
         <div className="editor-container">
-          <label htmlFor="" className='edtor-label'>Description</label>
+          <label htmlFor="" className='edtor-label'>Remarks</label>
            <ReactQuill className="editor-input" 
             theme="snow" value={description} 
             onChange={setDescription} 
-            placeholder='Write prescription description here..'
+            placeholder='Write prescription remarks here..'
             />
         </div>
         </DialogContent>

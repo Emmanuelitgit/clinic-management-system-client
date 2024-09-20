@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import doctor from "../../Componets/images/staff/doctor 1.png";
 import { useLocation } from 'react-router-dom';
 import api from '../../api';
+import PrintIcon from '@mui/icons-material/Print';
+import { saveAs } from 'file-saver';
 
 
 const ViewBloodBank = () => {
@@ -21,10 +23,23 @@ const ViewBloodBank = () => {
         }
     }
 
+    console.log(data)
+
     const getText = (html) =>{
         const doc = new DOMParser().parseFromString(html, "text/html")
         return doc.body.textContent
      }
+
+     const handleDownloadPDF = () => {
+        console.log(data)
+          api.post('/create-lab-report-pdf', data)
+            .then(() => api.get('fetch-lab-report-pdf', { responseType: 'blob' }))
+            .then((res) => {
+              const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+      
+              saveAs(pdfBlob, 'report.pdf');
+            })
+        }
  
     useEffect(()=>{
         const getStaff = async()=>{
@@ -54,6 +69,7 @@ const ViewBloodBank = () => {
                          <th className='view-patient-th '>Test Name</th>
                          <th className='view-patient-th '>Laboratorist</th>
                          <th className='view-patient-th '>Date</th>
+                         <th className='view-patient-th '>Action</th>
                      </tr>
                    </thead>
                    <tbody>
@@ -63,6 +79,17 @@ const ViewBloodBank = () => {
                          <td className='medical-history-td-tr'>{lab.test_name}</td>
                          <td className='medical-history-td-tr'>{lab.laboratorist_name}</td>
                          <td className='medical-history-td-tr'>{lab.laboratorist_name}</td>
+                         <td className='medical-history-td-tr'>
+                       <button onClick={handleDownloadPDF} style={{
+                        backgroundColor:"navy",
+                        padding:"4px",
+                        border:"none",
+                        width:"70%",
+                        color:"white",
+                       }}>
+                         <PrintIcon/>
+                       </button>
+                       </td>
                      </tr>
                       ))}
                    </tbody>

@@ -152,6 +152,8 @@ const PrescriptionList = () => {
                             desc={item.description}
                             patient_name={item.patient_name}
                             doctor_name={item.doctor_name}
+                            dosage={item.dosage}
+                            duration={item.duration}
                            />
                       )
                   })),

@@ -9,6 +9,7 @@ const AdminNavs = () => {
 
   const location = useLocation();
   const route = location.pathname;
+  
   return (
     <div>
       <Navbar/>

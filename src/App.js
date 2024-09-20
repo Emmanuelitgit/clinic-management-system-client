@@ -228,6 +228,7 @@ const router = createBrowserRouter([
       { path: "/nurse/predict/liver-disease", element: <LiverDisease /> },
       { path: "/nurse/predict/diabetes", element: <Diabetes /> },
       { path: "/nurse/profile", element: <Profile /> },
+      { path: "/nurse/chat", element: <Chat /> },
     ]
   },
 
@@ -244,6 +245,7 @@ const router = createBrowserRouter([
       {path: "/pharmacist/view-medicine/:id",element: <ViewMedicine/>},
       { path: "/pharmacist/view-prescription/:id", element: <ViewPrescription /> },
       { path: "/pharmacist/profile", element: <Profile /> },
+      { path: "/pharmacist/chat", element: <Chat /> },
     ]
   },
 
@@ -264,6 +266,7 @@ const router = createBrowserRouter([
         { path: "/laboratorist/liver-disease", element: <LiverDisease /> },
         { path: "/laboratorist/diabetes", element: <Diabetes /> }, 
         { path: "/laboratorist/profile", element: <Profile /> },
+        { path: "/laboratorist/chat", element: <Chat /> },
       ]
     },
 
@@ -277,6 +280,7 @@ const router = createBrowserRouter([
             {path: "/radiographer/scan-reports",element: <ResultList/>},
             { path: "/radiographer/view-result/:id", element: <ViewResult /> },
             { path: "/radiographer/profile", element: <Profile /> },
+            { path: "/radiographer/chat", element: <Chat /> },
           ]
         },
 
@@ -290,6 +294,7 @@ const router = createBrowserRouter([
       {path: "/accountant/invoice-list",element: <InvoiceList/>},
       {path: "/accountant/view-invoice/:id",element: <ViewInvoice/>},
       { path: "/accountant/profile", element: <Profile /> },
+      { path: "/accountant/chat", element: <Chat /> },
     ]
   },
 

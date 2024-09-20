@@ -75,7 +75,7 @@ const Navbar = () => {
                className='menu-icon'
                />
            </span>
-           <img src={require("../../uploads/logo2.avif")} alt=""  className='logo'/>
+           <img src="https://img.freepik.com/free-vector/hospital-logo-design-vector-medical-cross_53876-136743.jpg?t=st=1726320888~exp=1726324488~hmac=66f3fc1857fbcb466fd31d1c67e069d42bd8725a1b71c0fc66d16a25ec916b5c&w=740" alt=""  className='logo'/>
             <span className='navbar-title'>{settings[0]?.system_name}
             <span className='dash'>-</span> 
             </span> <span className='zangu'> ZANGU-VUGA</span>

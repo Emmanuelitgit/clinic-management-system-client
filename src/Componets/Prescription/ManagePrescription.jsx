@@ -31,7 +31,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function ManagePrescription({name, id, patient_id,doctor_id,medication,date,desc,patient_name,doctor_name}) {
+export default function ManagePrescription({name, id, patient_id,doctor_id,medication,date,desc,patient_name,doctor_name,dosage,duration}) {
 
   axios.defaults.withCredentials = true;
 
@@ -45,6 +45,8 @@ export default function ManagePrescription({name, id, patient_id,doctor_id,medic
     patient_id:null,
     doctor_id:null,
     medication:'',
+    dosage:'',
+    duration:'',
     description:description,
     date:''
   });
@@ -75,6 +77,8 @@ export default function ManagePrescription({name, id, patient_id,doctor_id,medic
       patient_id:patient_id,
       doctor_id:doctor_id,
       medication:medication,
+      dosage:dosage,
+      duration:duration,
       date:date
     })
   };
@@ -224,9 +228,29 @@ export default function ManagePrescription({name, id, patient_id,doctor_id,medic
             <label htmlFor="">Medication</label>
             <input type="text"
               className='input'
-              placeholder='eg Mohammed Yidana'
+              placeholder='eg Paracetamol'
               name='medication'
               value={data.medication}
+              onChange={handleChange} 
+            />
+        </div>
+        <div className='input-container'>
+            <label htmlFor="">Dosage</label>
+            <input type="text"
+              className='input'
+              placeholder='eg 1 TAB'
+              name='dosage'
+              value={data.dosage}
+              onChange={handleChange} 
+            />
+        </div>
+        <div className='input-container'>
+            <label htmlFor="">Duration</label>
+            <input type="text"
+              className='input'
+              placeholder='eg 2 Months'
+              name='duration'
+              value={data.duration}
               onChange={handleChange} 
             />
         </div>
