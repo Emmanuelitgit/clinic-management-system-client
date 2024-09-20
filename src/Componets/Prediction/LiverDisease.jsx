@@ -101,21 +101,6 @@ const LiverDisease = () => {
         </Button>
 
         <br />
-        {show && 
-        <Alert variant="danger" 
-         onClose={() => setShow(false)} 
-         dismissible 
-         style={{
-          width:"50%", 
-          marginTop:"5%",
-        }
-         }>
-        <Alert.Heading>Below is your result.Thank you!</Alert.Heading>
-        <p>
-           {message}
-        </p>
-      </Alert>
-        }
       </div>
     </div>
   );
