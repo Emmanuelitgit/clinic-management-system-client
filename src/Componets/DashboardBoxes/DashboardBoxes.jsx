@@ -35,8 +35,8 @@ const DashboardBoxes = () => {
         <LaboratoristBoxes/>
         <RadiographerBoxes/>
 
-        { (role === "doctor" || role === "nurse") && <div className="doctor-nurse-horizontal-line"></div> } 
-        { (role !== "admin" && role !== "doctor" && role !== "nurse") && <div className="other-horizontal-line"></div> } 
+        { (role === "doctor" || role === "nurse" || role === "laboratorist") && <div className="doctor-nurse-horizontal-line"></div> } 
+        { (role !== "admin" && role !== "doctor" && role !== "nurse" && role !== "laboratorist") && <div className="other-horizontal-line"></div> } 
 
         <div className="footer-text-container">
         </div>
