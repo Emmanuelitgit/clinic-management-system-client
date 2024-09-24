@@ -44,6 +44,7 @@ export default function AddInvoice() {
   const [data, setData] = useState({
     title:'',
     amount:'',
+    method:'',
     patient_id:null,
     email:'',
     accountant_id:'',
@@ -137,6 +138,7 @@ useEffect(() => {
       const response = await api.post(`/add_invoice`, {
         ...data, amount:parseFloat(data.amount)
       });
+      console.log(response)
       if(response.status === 201){
         handleDepCount()
         handleClose()
@@ -150,9 +152,11 @@ useEffect(() => {
           },
         });
         
+       if(data.method === "MOMO"){
         const { authorization_url } = response.data.data;
         const { reference } = response.data.data;
         window.location.href = authorization_url;
+       }
       }
     } catch (error) {
       Swal.fire({
@@ -215,6 +219,14 @@ useEffect(() => {
             />
           </div>
           <div className='input-container'>
+            <label htmlFor="">Paymenet Method</label>
+            <select name="method" id="" className='dropdown' onChange={handleChange} >
+              <option value="">--Select Payment Method--</option>
+              <option value="Cash">Cash</option>
+              <option value="MOMO">MOMO</option>
+            </select>
+          </div>
+          <div className='input-container'>
           <label htmlFor="">Patient</label>
             <select name="patient_id" onChange={handleChange} value={data.patient} className='dropdown'>
               <option value="">--Select Patient--</option>
@@ -226,7 +238,7 @@ useEffect(() => {
             </select>
         </div>
         <div className='input-container'>
-            <label htmlFor="">Email:</label>
+            <label htmlFor="">Email</label>
             <input type="email"
               className='input'
               placeholder='eg eyidana001@gmail.com'

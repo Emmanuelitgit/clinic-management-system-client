@@ -19,7 +19,10 @@ const LogoutBtn = ({visible}) => {
   return (
     <div className='logout-container' 
      onClick={handleLogout}
-     style={{marginTop: visible ? "300px" : "0px"}}
+     style={{
+      marginTop: visible ? "300px" : "80px",
+      marginLeft:"20px"
+     }}
     >
       <Logout className='sidebar-icon'/>
       <span className='logout'>Logout</span>
