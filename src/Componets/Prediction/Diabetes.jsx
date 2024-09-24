@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const Diabetes = () => {
@@ -19,7 +20,7 @@ const Diabetes = () => {
   });
   const [message, setMessage] = useState('');
   const [show, setShow] = useState(false);
-
+  const [open, setOpen] = useState(false)
 
   const handleChange = (e) => {
     setFeatures({
@@ -29,6 +30,7 @@ const Diabetes = () => {
   };
 
   const handleSubmit = async () => {
+    setOpen(true)
     const formattedFeatures = Object.values(features).map(feature => parseFloat(feature));
   
     try {
@@ -51,6 +53,8 @@ const Diabetes = () => {
       }
     } catch (error) {
       console.error("There was an error making the request:", error);
+    }finally{
+      setOpen(false)
     }
   };
   
@@ -92,10 +96,22 @@ const Diabetes = () => {
         <Button
           variant="primary"
           type="button"
-          style={{ width: "30%", padding: "0.7%", border: 'none', outline: 'none' }}
+          style={{ width: "25%", padding: "0.7%", border: 'none', outline: 'none' }}
           onClick={handleSubmit}
         >
-          Submit
+       {open && 
+         <div>
+         <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        Processing...
+         </div>
+       }
+       {!open &&  <span>Submit</span>}
         </Button>
 
         <br />

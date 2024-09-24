@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const LiverDisease = () => {
@@ -21,7 +22,7 @@ const LiverDisease = () => {
   });
   const [message, setMessage] = useState('');
   const [show, setShow] = useState(false);
-
+  const [open, setOpen] = useState(false)
 
   const handleChange = (e) => {
     setFeatures({
@@ -31,6 +32,7 @@ const LiverDisease = () => {
   };
 
   const handleSubmit = async () => {
+    setOpen(true)
     const formattedFeatures = Object.values(features).map(feature => parseFloat(feature));
   
     try {
@@ -53,6 +55,8 @@ const LiverDisease = () => {
       }
     } catch (error) {
       console.error("There was an error making the request:", error);
+    }finally{
+      setOpen(false)
     }
   };
   
@@ -62,7 +66,7 @@ const LiverDisease = () => {
       <PredictionSidebar />
       <div className={show? "prediction-form" : "prediction-forms"}>
       {show && 
-        <Alert variant="danger" 
+        <Alert variant="success" 
          onClose={() => setShow(false)} 
          dismissible 
          style={{
@@ -97,7 +101,19 @@ const LiverDisease = () => {
           style={{ width: "30%", padding: "0.7%", border: 'none', outline: 'none' }}
           onClick={handleSubmit}
         >
-          Submit
+          {open && 
+         <div>
+         <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        Processing...
+         </div>
+       }
+       {!open &&  <span>Submit</span>}
         </Button>
 
         <br />
