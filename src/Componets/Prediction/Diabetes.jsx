@@ -64,7 +64,7 @@ const Diabetes = () => {
       <PredictionSidebar />
       <div className={show? "prediction-form" : "prediction-forms"}>
       {show && 
-        <Alert variant="danger" 
+        <Alert variant="success" 
          onClose={() => setShow(false)} 
          dismissible 
          style={{
