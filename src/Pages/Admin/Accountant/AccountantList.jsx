@@ -7,7 +7,8 @@ import AddStaff from '../Add Staff/AddStaff';
 import ManageStaff from '../Add Staff/ManageStaff';
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-
+import axios from 'axios';  // Import Axios
+import api from '../../../api';
 
 const AccountantList = () => {
 
@@ -22,15 +23,12 @@ const AccountantList = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
+          // Axios GET request with credentials
+          const response = await api.get(`/staff/${role}`, {
+            withCredentials: true // Important for including cookies
+          });
 
-          const response = await fetch(`http://localhost:5000/staff/${role}`, {
-            method: 'GET',
-            credentials: 'include', // Important for including cookies
-        })
-            if(!response.ok){
-              throw new Error("faild to fetch")
-            }
-            const fetchedData = await response.json()
+          const fetchedData = response.data;
 
           const transformedData = {
             columns: [
